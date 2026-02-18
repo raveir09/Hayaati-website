@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Hayaati 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c8536a;
+    --blush: #f4d0d8;
+    --deep: #1a0a10;
+    --petal: #f9eaed;
+    --gold: #c9a96e;
+    --muted: #8a5a66;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--petal);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--rose);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: screen;
+  }
+  .cursor-trail {
+    width: 30px; height: 30px;
+    border: 1px solid var(--rose);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transition: all 0.3s ease;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: center;
+    gap: 2rem; padding: 1.2rem 2rem;
+    background: linear-gradient(to bottom, rgba(26,10,16,0.95), transparent);
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+  nav a { color: var(--blush); text-decoration: none; opacity: 0.7; transition: all 0.3s; }
+  nav a:hover { opacity: 1; color: var(--gold); }
+
+  #hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; overflow: hidden; text-align: center; padding: 2rem;
+  }
+
+  .petals-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+  .petal-particle {
+    position: absolute; width: 6px; height: 10px;
+    background: radial-gradient(ellipse, var(--rose), transparent);
+    border-radius: 50% 50% 50% 0; opacity: 0;
+    animation: fallPetal linear infinite;
+  }
+  @keyframes fallPetal {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; } 90% { opacity: 0.3; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+  .hero-subtitle {
+    font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+  .hero-title {
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(5rem, 15vw, 11rem);
+    color: var(--blush); line-height: 0.9;
+    animation: fadeUp 1s ease 0.6s both;
+    text-shadow: 0 0 80px rgba(200,83,106,0.3);
+  }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: clamp(1rem, 3vw, 1.4rem);
+    color: var(--muted); margin-top: 1.5rem;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+  .heart-pulse {
+    font-size: 2rem; margin-top: 3rem;
+    animation: fadeUp 1s ease 1.2s both, heartbeat 1.5s ease infinite;
+    display: inline-block;
+  }
+  @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--muted); animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-8px); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem; display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 300;
+    line-height: 1.1; margin-bottom: 3rem; color: var(--blush);
+  }
+
+  #daily { text-align: center; }
+  .daily-card {
+    background: linear-gradient(135deg, rgba(200,83,106,0.08), rgba(201,169,110,0.04));
+    border: 1px solid rgba(200,83,106,0.2); border-radius: 2px;
+    padding: 3rem 2.5rem; position: relative; overflow: hidden;
+  }
+  .daily-card::before {
+    content: '\201C'; font-family: 'Pinyon Script', cursive;
+    font-size: 10rem; color: rgba(200,83,106,0.08);
+    position: absolute; top: -2rem; left: 1rem; line-height: 1;
+  }
+  .daily-date { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .daily-message-text {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.5rem); line-height: 1.8;
+    color: var(--petal); position: relative; z-index: 1;
+  }
+  .daily-signature { margin-top: 1.5rem; font-family: 'Pinyon Script', cursive; font-size: 1.8rem; color: var(--rose); }
+
+  .letter-body {
+    background: rgba(244,208,216,0.04);
+    border-left: 2px solid rgba(200,83,106,0.3);
+    padding: 2.5rem 2.5rem 2.5rem 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.15rem); line-height: 2;
+    color: rgba(249,234,237,0.9);
+  }
+  .letter-body p { margin-bottom: 1.5rem; }
+  .letter-body .salutation {
+    font-family: 'Pinyon Script', cursive; font-size: 2rem;
+    color: var(--rose); margin-bottom: 1rem; display: block;
+  }
+  .letter-body .closing { font-family: 'Pinyon Script', cursive; font-size: 2rem; color: var(--rose); margin-top: 2rem; }
+
+  .reasons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  .reason-card {
+    background: rgba(200,83,106,0.05);
+    border: 1px solid rgba(200,83,106,0.15); border-radius: 2px;
+    padding: 1.5rem; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: default;
+  }
+  .reason-card::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(200,83,106,0.1), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .reason-card:hover { border-color: rgba(200,83,106,0.5); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(200,83,106,0.1); }
+  .reason-card:hover::after { opacity: 1; }
+  .reason-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: rgba(200,83,106,0.2); font-weight: 300; line-height: 1; margin-bottom: 0.5rem; display: block; }
+  .reason-text { font-size: 0.85rem; line-height: 1.7; color: var(--blush); position: relative; z-index: 1; }
+
+  #sorry .reason-card { background: rgba(201,169,110,0.04); border-color: rgba(201,169,110,0.15); }
+  #sorry .reason-card:hover { border-color: rgba(201,169,110,0.4); box-shadow: 0 20px 40px rgba(201,169,110,0.08); }
+  #sorry .reason-num { color: rgba(201,169,110,0.2); }
+  #apology .letter-body { border-left-color: rgba(201,169,110,0.4); }
+
+  #art { text-align: center; }
+  .art-canvas-wrap { position: relative; display: inline-block; width: 100%; max-width: 600px; }
+  canvas#loveCanvas { width: 100%; border-radius: 2px; display: block; }
+  .art-controls { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+  .art-btn {
+    background: transparent; border: 1px solid rgba(200,83,106,0.4); color: var(--blush);
+    padding: 0.6rem 1.8rem; font-family: 'Jost', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 1px;
+  }
+  .art-btn:hover { background: rgba(200,83,106,0.15); border-color: var(--rose); color: #fff; }
+  .art-btn.active { background: rgba(200,83,106,0.2); border-color: var(--rose); }
+
+  .divider { text-align: center; padding: 2rem 0; color: rgba(200,83,106,0.3); font-size: 1.2rem; letter-spacing: 1rem; }
+
+  footer { text-align: center; padding: 4rem 2rem; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); border-top: 1px solid rgba(200,83,106,0.1); }
+  footer .big-script { font-family: 'Pinyon Script', cursive; font-size: 3rem; color: var(--rose); display: block; margin-bottom: 1rem; text-transform: none; letter-spacing: 0; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .floating-hearts { position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+  .fheart { position: absolute; bottom: -50px; animation: floatUp linear infinite; opacity: 0; }
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    20% { opacity: 0.3; } 80% { opacity: 0.2; }
+    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+  }
+
+  @media (max-width: 600px) {
+    nav { gap: 1rem; font-size: 0.58rem; }
+    .reasons-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-trail" id="cursorTrail"></div>
+<div class="floating-hearts" id="floatingHearts"></div>
+
+<nav>
+  <a href="#daily">Daily Message</a>
+  <a href="#letter">Love Letter</a>
+  <a href="#reasons">21 Reasons</a>
+  <a href="#sorry">21 Apologies</a>
+  <a href="#apology">Apology Letter</a>
+  <a href="#art">Love Art</a>
+</nav>
+
+<section id="hero">
+  <div class="petals-bg" id="petalsBg"></div>
+  <div class="hero-content">
+    <p class="hero-subtitle">A universe made just for you</p>
+    <h1 class="hero-title">Hayaati</h1>
+    <p class="hero-tagline">You are my life, my heartbeat, my everything</p>
+    <span class="heart-pulse">🌹</span>
+  </div>
+  <p class="scroll-hint">↓ explore ↓</p>
+</section>
+
+<section id="daily">
+  <span class="section-label reveal">Every single day</span>
+  <h2 class="section-title reveal">Today's Message<br>for You</h2>
+  <div class="daily-card reveal">
+    <p class="daily-date" id="todayDate"></p>
+    <p class="daily-message-text" id="dailyMsg"></p>
+    <p class="daily-signature">Always yours 💕</p>
+  </div>
+</section>
+
+<div class="divider">· · · ♡ · · ·</div>
+
+<section id="letter">
+  <span class="section-label reveal">Written from the heart</span>
+  <h2 class="section-title reveal">A Love Letter<br>to Hayaati</h2>
+  <div class="letter-body reveal">
+    <span class="salutation">My dearest Hayaati,</span>
+    <p>I sit here, searching for words worthy of you — and I find that no language has yet been invented that could fully capture what you mean to me. You are not simply the person I love. You are the reason I understand what love actually is.</p>
+    <p>Before you, I moved through days without truly feeling them. I smiled, I laughed, I lived — but I was only half present, half awake. You changed that. With you, every ordinary moment becomes something I want to remember forever: the way you laugh before the punchline, the warmth of your presence in a quiet room, the way your eyes hold entire worlds I keep wanting to explore.</p>
+    <p>I love the way your mind works — how you see beauty where others don't, how you care so deeply for the people around you, how you're honest even when it's hard, how you carry yourself with a quiet strength that leaves me in awe.</p>
+    <p>I want you to know that choosing you every single day is the easiest decision I've ever made. In a world full of noise and chaos, you are my stillness. You are my home. Wherever you are, that is where I want to be.</p>
+    <p>Thank you for letting me love you. Thank you for loving me back. Thank you for being exactly who you are, because who you are is the most beautiful thing I've ever encountered.</p>
+    <p>This letter is too short. A thousand letters would be too short. But know that every breath I take carries your name, and every heartbeat beats a little louder because of you.</p>
+    <span class="closing">Forever and always, yours 🌹</span>
+  </div>
+</section>
+
+<div class="divider">· · · ♡ · · ·</div>
+
+<section id="reasons">
+  <span class="section-label reveal">Every single one is true</span>
+  <h2 class="section-title reveal">21 Reasons<br>I Love You</h2>
+  <div class="reasons-grid" id="reasonsGrid"></div>
+</section>
+
+<div class="divider">· · · ♡ · · ·</div>
+
+<section id="sorry">
+  <span class="section-label reveal">With all my heart</span>
+  <h2 class="section-title reveal">21 Reasons<br>I'm Sorry</h2>
+  <div class="reasons-grid" id="sorryGrid"></div>
+</section>
+
+<div class="divider">· · · ♡ · · ·</div>
+
+<section id="apology">
+  <span class="section-label reveal">From the deepest part of me</span>
+  <h2 class="section-title reveal">My Sincerest<br>Apology</h2>
+  <div class="letter-body reveal">
+    <span class="salutation">Hayaati,</span>
+    <p>I owe you more than an apology — I owe you the truth that I haven't always been the person you deserve. I've made mistakes. I've hurt you in ways I wish I could undo. And I need you to know that I carry the weight of that with me every day — not out of guilt alone, but because I love you so much that your pain becomes mine.</p>
+    <p>I'm sorry for the times I was too proud to be vulnerable. For the moments I let my ego stand taller than my love. I'm sorry for every time I made you feel unseen, unheard, or unimportant — because you are the most seen, most heard, most important person in my world.</p>
+    <p>I'm sorry for the words I chose poorly, for the silences that said the wrong thing, for the times I wasn't there when you needed me most. I'm sorry for taking your patience for granted — your patience is a gift I didn't always treat like one.</p>
+    <p>I don't want to just say sorry. I want to be different. I want to be the man who shows up fully — present, honest, tender, and consistent. I'm working on that. Every single day. For you.</p>
+    <p>If you'll let me, I'll spend every day proving that I know what I have in you. You are extraordinary. You are rare. And I refuse to let another moment pass without making sure you feel exactly that.</p>
+    <p>Please forgive me, not just with your words, but in the quiet spaces of your heart. I love you more than I have ever been able to properly express — and I will keep trying until I get it right.</p>
+    <span class="closing">Your sincerest love, always 💛</span>
+  </div>
+</section>
+
+<div class="divider">· · · ♡ · · ·</div>
+
+<section id="art">
+  <span class="section-label reveal">Painted just for you</span>
+  <h2 class="section-title reveal">Love Art<br>for Hayaati</h2>
+  <div class="art-canvas-wrap reveal">
+    <canvas id="loveCanvas" width="600" height="500"></canvas>
+    <div class="art-controls">
+      <button class="art-btn active" id="btn-hearts" onclick="drawArt('hearts', this)">Hearts</button>
+      <button class="art-btn" id="btn-galaxy" onclick="drawArt('galaxy', this)">Galaxy</button>
+      <button class="art-btn" id="btn-roses" onclick="drawArt('roses', this)">Roses</button>
+      <button class="art-btn" id="btn-stars" onclick="drawArt('stars', this)">Stars</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="big-script">Hayaati</span>
+  Made with love · Every day · Forever
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursorTrail');
+let mx = 0, my = 0, tx = 0, ty = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  cursor.style.left = mx - 6 + 'px'; cursor.style.top = my - 6 + 'px';
+  tx += (mx - tx) * 0.1; ty += (my - ty) * 0.1;
+  trail.style.left = tx - 15 + 'px'; trail.style.top = ty - 15 + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+// Petals
+const petalsBg = document.getElementById('petalsBg');
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal-particle';
+  p.style.cssText = `left:${Math.random()*100}%;animation-duration:${8+Math.random()*10}s;animation-delay:${Math.random()*12}s;width:${4+Math.random()*6}px;height:${6+Math.random()*8}px`;
+  petalsBg.appendChild(p);
+}
+
+// Floating hearts
+const fh = document.getElementById('floatingHearts');
+const hemojis = ['♡','💕','💗','🌹','✨','💫'];
+for (let i = 0; i < 15; i++) {
+  const h = document.createElement('div');
+  h.className = 'fheart';
+  h.textContent = hemojis[i % hemojis.length];
+  h.style.cssText = `left:${Math.random()*100}%;animation-duration:${12+Math.random()*15}s;animation-delay:${Math.random()*20}s;font-size:${0.6+Math.random()*0.8}rem`;
+  fh.appendChild(h);
+}
+
+// Daily message
+const messages = [
+  "Good morning, sunshine. You were the first thought on my mind when I woke up today — and every day. I hope today is as beautiful as you are.",
+  "I just want you to know that you make this world infinitely better simply by being in it. Thank you for existing, Hayaati.",
+  "Today I was thinking about the way you smile, and I lost track of everything else. You have that kind of power over me, and I love it.",
+  "Whatever today brings you — good or hard — I want you to know someone loves you fiercely, unconditionally, and completely. That someone is me.",
+  "You are not just in my heart. You are my heart. Everything I do, I do with you somewhere in it.",
+  "I keep falling in love with you over and over again. Every single day you give me a new reason. Today's reason? Just you being you.",
+  "Distance means nothing when someone means everything. You mean everything to me.",
+  "I hope today treats you with the same kindness and love that you give to everyone around you. You deserve the world, Hayaati.",
+  "I was made for you. I truly believe that. And I'll spend every day of my life showing you exactly that.",
+  "Some days I just sit quietly and think about how lucky I am. Lucky to know you. Lucky to love you. Lucky to be loved by you.",
+  "You are my favorite chapter in this story called life. And I never want it to end.",
+  "I love your strength. I love your softness. I love every contradiction and complexity that makes you, you.",
+  "Today is a reminder: you are seen, you are loved, you are everything.",
+  "I carry your heart everywhere I go — in the most literal way possible. It lives in my chest, beating next to mine.",
+  "Thank you for being patient with me. Thank you for loving me on the days I'm hard to love. I don't take that for granted.",
+  "Every love song I've ever heard suddenly makes more sense because of you.",
+  "You are my peace. In a world that never stops, you are my stillness.",
+  "I choose you. Not just today, not just when it's easy — always. In every version of this life.",
+  "Loving you is the best thing I've ever done. And I plan to keep doing it for as long as you'll let me.",
+  "You deserve all the softness the world has to offer. I'll do my part every single day.",
+  "Just a reminder on this ordinary day: nothing about what I feel for you is ordinary. It's extraordinary. You are extraordinary.",
+  "You turn every ordinary moment into a memory I want to keep forever.",
+  "My life made more sense the moment you walked into it.",
+  "I love you not because I need you. I need you because I love you — deeply, truly, always.",
+  "Today, tomorrow, and in every tomorrow after that — you are the one I choose.",
+  "I wrote a thousand messages for you, but none of them say it quite right: I just love you. Simply, completely, endlessly.",
+  "The way you exist in this world makes it better. And the way you exist in my world makes it perfect.",
+  "You are my favorite dream that I never want to wake up from.",
+  "I hope you feel today just a fraction of how much you mean to me. Even a fraction would be overwhelming.",
+  "Forever isn't long enough when you're who I'm spending it with.",
+  "You are loved. Deeply, madly, wholly. Never forget that."
+];
+const now = new Date();
+const dayIdx = (now.getFullYear() * 365 + now.getMonth() * 31 + now.getDate()) % messages.length;
+document.getElementById('dailyMsg').textContent = messages[dayIdx];
+document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+// 21 Love reasons
+const loveReasons = [
+  "The way your eyes light up when you talk about things you love",
+  "Your laugh — the real one, the uncontrollable one",
+  "How deeply and genuinely you care for people",
+  "Your strength in the quiet moments no one else sees",
+  "The way you make ordinary moments feel like magic",
+  "Your honesty, even when it takes courage to be honest",
+  "The warmth you carry that makes everyone around you feel safe",
+  "How beautiful you are — inside, outside, in every possible way",
+  "The way your mind works — creative, sharp, wonderful",
+  "Your kindness. It's effortless and it's rare.",
+  "The way you love; fully, generously, without conditions",
+  "How you make me want to be a better person every single day",
+  "Your resilience — how you rise no matter what life throws",
+  "The sound of your voice, especially when you say my name",
+  "Your curiosity about the world and everything in it",
+  "The little things you do that you don't even know I notice",
+  "How perfectly you fit in my arms, like you were made to be there",
+  "Your vulnerability — the courage it takes to let someone truly in",
+  "The way you see beauty in the world that others walk right past",
+  "How you make me feel seen, truly seen, in a way I never have before",
+  "Simply because you exist. Because you're you. That is more than enough."
+];
+
+const rg = document.getElementById('reasonsGrid');
+loveReasons.forEach((r, i) => {
+  const c = document.createElement('div');
+  c.className = 'reason-card reveal';
+  c.innerHTML = `<span class="reason-num">${String(i+1).padStart(2,'0')}</span><p class="reason-text">${r}</p>`;
+  rg.appendChild(c);
+});
+
+// 21 Sorry reasons
+const sorryReasons = [
+  "For every time I made you feel less than the incredible person you are",
+  "For the moments I chose my pride over your feelings",
+  "For not listening closely enough when you were speaking",
+  "For the times I was cold when you needed warmth",
+  "For taking your love for granted as if it were guaranteed",
+  "For every time I made you cry when I should have made you smile",
+  "For promises I made but didn't keep",
+  "For the days I was emotionally absent even when physically present",
+  "For every thoughtless word I said that I can never fully take back",
+  "For not celebrating you enough, loudly and often",
+  "For the times I didn't show up the way you needed me to",
+  "For making you question whether you were enough — you are more than enough",
+  "For not apologizing sooner, and not meaning it more completely",
+  "For every time I let my bad days spill onto you unfairly",
+  "For the moments I was selfish when I should have been selfless",
+  "For not protecting your peace the way you always protect mine",
+  "For being too slow to recognize the effort you put into us",
+  "For making you feel like loving me was a burden — it is the greatest gift",
+  "For the insecurities I let become unfair accusations toward you",
+  "For every time you felt alone while you were with me",
+  "For not telling you 'I'm sorry' and 'I love you' nearly enough"
+];
+
+const sg = document.getElementById('sorryGrid');
+sorryReasons.forEach((r, i) => {
+  const c = document.createElement('div');
+  c.className = 'reason-card reveal';
+  c.innerHTML = `<span class="reason-num">${String(i+1).padStart(2,'0')}</span><p class="reason-text">${r}</p>`;
+  sg.appendChild(c);
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── LOVE ART ──
+const canvas = document.getElementById('loveCanvas');
+const ctx = canvas.getContext('2d');
+let artAnimId = null;
+
+function drawArt(mode, btn) {
+  if (artAnimId) cancelAnimationFrame(artAnimId);
+  document.querySelectorAll('.art-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  if (mode === 'hearts') startHearts();
+  else if (mode === 'galaxy') startGalaxy();
+  else if (mode === 'roses') startRoses();
+  else if (mode === 'stars') startStars();
+}
+
+// HEARTS
+let heartsList = [];
+function drawHeartShape(x, y, s, color, alpha) {
+  ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(x, y + s*0.3);
+  ctx.bezierCurveTo(x, y, x-s, y, x-s, y+s*0.3);
+  ctx.bezierCurveTo(x-s, y+s*0.65, x, y+s*0.95, x, y+s*1.1);
+  ctx.bezierCurveTo(x, y+s*0.95, x+s, y+s*0.65, x+s, y+s*0.3);
+  ctx.bezierCurveTo(x+s, y, x, y, x, y+s*0.3);
+  ctx.fill(); ctx.restore();
+}
+function startHearts() {
+  heartsList = [];
+  function frame() {
+    ctx.fillStyle = 'rgba(26,8,14,0.18)';
+    ctx.fillRect(0, 0, 600, 500);
+    ctx.save(); ctx.globalAlpha = 0.06; ctx.fillStyle = '#c8536a';
+    ctx.font = 'italic 85px "Pinyon Script", cursive';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 260); ctx.restore();
+    if (Math.random() < 0.1) {
+      heartsList.push({
+        x: Math.random()*600, y: 520,
+        s: 10+Math.random()*28, spd: 0.6+Math.random()*1.4,
+        w: Math.random()*Math.PI*2, a: 0.5+Math.random()*0.45,
+        hue: 330+Math.random()*30, sat: 65+Math.random()*20, lit: 55+Math.random()*20
+      });
+    }
+    heartsList = heartsList.filter(h => h.y > -60);
+    heartsList.forEach(h => {
+      h.y -= h.spd; h.w += 0.02; h.x += Math.sin(h.w)*0.6;
+      drawHeartShape(h.x, h.y, h.s, `hsl(${h.hue},${h.sat}%,${h.lit}%)`, h.a);
+    });
+    artAnimId = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// GALAXY
+let galAngle = 0;
+const galStars = Array.from({length:180}, () => ({
+  x: Math.random()*600, y: Math.random()*500,
+  r: Math.random()*1.8, ph: Math.random()*Math.PI*2, spd: 0.005+Math.random()*0.01
+}));
+function startGalaxy() {
+  ctx.fillStyle = '#060210'; ctx.fillRect(0,0,600,500);
+  galAngle = 0;
+  function frame() {
+    ctx.fillStyle = 'rgba(5,2,15,0.12)'; ctx.fillRect(0,0,600,500);
+    galAngle += 0.018;
+    galStars.forEach(s => {
+      s.ph += s.spd;
+      const a = 0.25 + Math.abs(Math.sin(s.ph))*0.75;
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(200,185,255,${a})`; ctx.fill();
+    });
+    for (let i = 0; i < 180; i++) {
+      const t = i*0.16 + galAngle, r = i*1.55;
+      const x = 300 + Math.cos(t)*r, y = 250 + Math.sin(t)*r*0.45;
+      if (x<0||x>600||y<0||y>500) continue;
+      ctx.beginPath(); ctx.arc(x, y, 1.3, 0, Math.PI*2);
+      ctx.fillStyle = `hsla(${270+i*0.6},75%,72%,0.55)`; ctx.fill();
+    }
+    ctx.save(); ctx.globalAlpha = 0.45+Math.sin(galAngle)*0.15;
+    ctx.fillStyle = '#e0ccff'; ctx.font = 'italic 62px "Pinyon Script", cursive';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 265); ctx.restore();
+    artAnimId = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// ROSES
+let roseT = 0;
+function drawRose(cx, cy, sz, hue) {
+  ctx.save(); ctx.translate(cx,cy); ctx.fillStyle = `hsla(${hue},55%,38%,0.7)`;
+  for (let p=0;p<5;p++) {
+    ctx.save(); ctx.rotate(p*Math.PI*2/5);
+    ctx.beginPath(); ctx.ellipse(0,-sz*0.5,sz*0.32,sz*0.52,0,0,Math.PI*2);
+    ctx.fill(); ctx.restore();
+  }
+  ctx.fillStyle = `hsla(${hue+15},65%,52%,0.5)`;
+  for (let p=0;p<5;p++) {
+    ctx.save(); ctx.rotate(p*Math.PI*2/5+0.3);
+    ctx.beginPath(); ctx.ellipse(0,-sz*0.35,sz*0.22,sz*0.38,0,0,Math.PI*2);
+    ctx.fill(); ctx.restore();
+  }
+  ctx.restore();
+}
+function startRoses() {
+  roseT = 0;
+  ctx.fillStyle = '#100608'; ctx.fillRect(0,0,600,500);
+  function frame() {
+    ctx.fillStyle = 'rgba(14,5,8,0.1)'; ctx.fillRect(0,0,600,500);
+    roseT += 0.012;
+    for (let i=0;i<7;i++) for (let j=0;j<5;j++) {
+      const cx = 50+i*85, cy = 50+j*100+Math.sin(roseT+i*0.5)*8;
+      drawRose(cx, cy, 20, 330+Math.sin(roseT+i+j)*12);
+      ctx.save(); ctx.translate(cx,cy+26); ctx.rotate(0.25+Math.sin(roseT+i)*0.08);
+      ctx.fillStyle='rgba(20,65,20,0.45)'; ctx.beginPath();
+      ctx.ellipse(0,6,7,13,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+    }
+    ctx.save(); ctx.globalAlpha = 0.5+Math.sin(roseT)*0.1;
+    ctx.fillStyle = '#ffdde8'; ctx.font = 'italic 58px "Pinyon Script", cursive';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 262); ctx.restore();
+    artAnimId = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// STARS / CONSTELLATION
+const constPts = Array.from({length:42},()=>({
+  x:25+Math.random()*550, y:25+Math.random()*450,
+  vx:(Math.random()-0.5)*0.25, vy:(Math.random()-0.5)*0.25,
+  r:0.8+Math.random()*2
+}));
+let constT = 0;
+function startStars() {
+  ctx.fillStyle = '#040212'; ctx.fillRect(0,0,600,500);
+  constT = 0;
+  function frame() {
+    ctx.fillStyle = 'rgba(4,2,18,0.18)'; ctx.fillRect(0,0,600,500);
+    constT += 0.006;
+    constPts.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<15||p.x>585) p.vx*=-1;
+      if(p.y<15||p.y>485) p.vy*=-1;
+    });
+    for (let i=0;i<constPts.length;i++) for (let j=i+1;j<constPts.length;j++) {
+      const dx=constPts[i].x-constPts[j].x, dy=constPts[i].y-constPts[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110) {
+        ctx.beginPath(); ctx.moveTo(constPts[i].x,constPts[i].y); ctx.lineTo(constPts[j].x,constPts[j].y);
+        ctx.strokeStyle=`rgba(200,175,255,${(1-d/110)*0.28})`; ctx.lineWidth=0.5; ctx.stroke();
+      }
+    }
+    constPts.forEach(p => {
+      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+      g.addColorStop(0,'rgba(255,225,255,0.95)'); g.addColorStop(1,'transparent');
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+    });
+    ctx.save(); ctx.globalAlpha = 0.4+Math.sin(constT*2)*0.12;
+    ctx.fillStyle = '#ccb8ff'; ctx.font = 'italic 60px "Pinyon Script", cursive';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 263); ctx.restore();
+    artAnimId = requestAnimationFrame(frame);
+  }
+  frame();
+}
+
+// Init
+startHearts();
+</script>
+</body>
+</html>
