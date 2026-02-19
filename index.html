@@ -26,7 +26,10 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
 
   body {
     min-height: 100vh;
@@ -35,12 +38,13 @@
       radial-gradient(ellipse at 85% 80%, rgba(232,122,191,0.35) 0%, transparent 45%),
       radial-gradient(ellipse at 60% 10%, rgba(180,140,255,0.4) 0%, transparent 40%),
       linear-gradient(150deg, #f0e6ff 0%, #ead5ff 35%, #f5ecff 65%, #fdf8ff 100%);
-    background-attachment: fixed;
+    background-attachment: scroll;
     color: var(--text-main);
     font-family: 'DM Sans', sans-serif;
     font-size: 18px;
     overflow-x: hidden;
     cursor: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   body::before {
@@ -91,7 +95,7 @@
   }
 
   /* ── PARTICLES ── */
-  .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; touch-action: none; }
   .particle {
     position: absolute;
     border-radius: 50%;
@@ -170,7 +174,7 @@
     font-size: 0.78rem;
     font-weight: 500;
     letter-spacing: 0.08em;
-    cursor: none;
+    cursor: pointer;
     backdrop-filter: blur(16px) saturate(140%);
     transition: all 0.3s ease;
     box-shadow: 0 2px 12px rgba(155,108,200,0.12), inset 0 1px 0 rgba(255,255,255,0.55);
@@ -188,19 +192,20 @@
     color: var(--p5);
     box-shadow: 0 4px 20px rgba(155,108,200,0.22), inset 0 1px 0 rgba(255,255,255,0.55);
   }
+  nav a { text-decoration: none; }
 
   /* ── SECTIONS ── */
   section {
     min-height: 100vh;
     height: auto;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 8rem 2rem 6rem;
     position: relative; z-index: 1;
   }
-  section.active { display: flex; animation: sectionIn 0.6s ease both; }
+  section.active { display: flex; }
   @keyframes sectionIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -314,7 +319,7 @@
   }
   .section-title {
     font-family: 'Dancing Script', cursive;
-    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-size: clamp(3.2rem, 8vw, 6rem);
     color: var(--p5);
     margin-bottom: 2.5rem;
     text-align: center;
@@ -386,7 +391,7 @@
   }
   .letter-salutation {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
+    font-size: 3.2rem;
     color: var(--p4);
     margin-bottom: 1.8rem;
     display: block;
@@ -403,7 +408,7 @@
   .letter-close p { color: var(--p5); font-size: 1rem; font-family: 'Lora', serif; font-style: italic; }
   .letter-sig {
     font-family: 'Dancing Script', cursive;
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: var(--p4);
     margin-top: 0.5rem;
     display: block;
@@ -550,10 +555,21 @@
   ::-webkit-scrollbar-thumb { background: var(--p3); border-radius: 3px; }
 
   @media (max-width: 600px) {
-    body { font-size: 16px; }
-    nav button { padding: 0.4rem 0.8rem; font-size: 0.65rem; }
-    .glass-card { padding: 2rem 1.4rem; }
-    .reasons-tabs { flex-direction: column; border-radius: 20px; }
+    body { font-size: 16px; cursor: auto; }
+    .cursor, .cursor-dot { display: none; }
+    nav { padding: 0.8rem 1rem; gap: 0.35rem; }
+    nav button { padding: 0.4rem 0.8rem; font-size: 0.62rem; }
+    .glass-card { padding: 2rem 1.4rem; border-radius: 20px; }
+    .reasons-tabs { flex-direction: row; border-radius: 50px; }
+    .tab-btn { padding: 0.5rem 0.9rem; font-size: 0.75rem; }
+    section { padding: 7rem 1.2rem 4rem; }
+    .hero-title { font-size: clamp(3.5rem, 18vw, 7rem); }
+    .section-title { font-size: clamp(2.2rem, 8vw, 4rem); }
+    .letter-salutation { font-size: 2.2rem; }
+    .letter-sig { font-size: 2.5rem; }
+    .letter-body p { font-size: 1rem; line-height: 1.9; }
+    .reason-text { font-size: 0.95rem; }
+    .daily-msg { font-size: 1.1rem; }
   }
 </style>
 </head>
@@ -564,12 +580,12 @@
 <div class="particles" id="particles"></div>
 
 <nav>
-  <button class="active" onclick="showSection('hero')">Home</button>
-  <button onclick="showSection('apology')">Apology Letter</button>
-  <button onclick="showSection('letter')">Love Letter</button>
-  <button onclick="showSection('reasons')">21 Reasons Why</button>
-  <button onclick="showSection('daily')">Daily Message</button>
-  <button onclick="showSection('art')">Love Art</button>
+  <button class="active" onclick="goTo('#hero')">Home</button>
+  <button onclick="goTo('#apology')">Apology Letter</button>
+  <button onclick="goTo('#letter')">Love Letter</button>
+  <button onclick="goTo('#reasons')">21 Reasons Why</button>
+  <button onclick="goTo('#daily')">Daily Message</button>
+  <button onclick="goTo('#art')">Love Art</button>
 </nav>
 
 <!-- HERO -->
@@ -577,7 +593,63 @@
   <div class="hero-badge">✦ A universe made just for you ✦</div>
   <h1 class="hero-title">Hayaati</h1>
   <p class="hero-sub">"You are my life, my heartbeat, my everything"</p>
-  <button class="neu-btn" onclick="showSection('apology')">Open My Heart &rarr;</button>
+  <button class="neu-btn" onclick="goTo('#apology')">Open My Heart &rarr;</button>
+</section>
+
+<!-- APOLOGY LETTER -->
+<section id="apology">
+  <div class="section-eyebrow">✦ From the deepest part of me ✦</div>
+  <h2 class="section-title">My Sincerest Apology</h2>
+  <div class="glass-card letter-wrap">
+    <div class="letter-meta">With a humbled heart,<br><span id="apologyDate"></span></div>
+    <span class="letter-salutation">Ololade Mi,</span>
+    <div class="letter-body">
+      <p>I owe you a sincere apology.</p>
+      <p>I should have communicated with you about what happened and why I wasn't able to get you a present for our anniversary. You deserved honesty, not silence, and I am truly sorry for that.</p>
+      <p>I am sorry for how I kept bringing up the fact that you didn't post me on our anniversary. Instead of trying to understand you, I let my feelings take over and handled everything the wrong way. I hate that I made you feel pressured and hurt over something I should have approached with love.</p>
+      <p>I am sorry for how I handled the situation while you were at camp. When you needed comfort, reassurance, and a safe space, I failed you. I should have been your confidant. I should have been your peace. I should have made myself available to you instead of adding to your pain.</p>
+      <p>Please know that I deeply regret my actions. Hurting you was never my intention. I take full responsibility for the way I handled everything, and I mean that from a place of genuine love and accountability, not just words.</p>
+      <p>You mean so much to me, Hayaati. I promise to grow, to communicate better, and to love you in ways that feel safe, secure, and steady.</p>
+      <p>I can't be without my Alayo. I can't be without "fungi" without you my Alayo, there's no fun in my life. Without my Amuludun, everything will be sour.</p>
+      <p>Please forgive me, Hayaati.</p>
+    </div>
+    <div class="letter-close">
+      <p>Your sincerest love, always,</p>
+      <span class="letter-sig">Mr Baby 💛</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOVE LETTER -->
+<section id="letter">
+  <div class="section-eyebrow">✦ Written from the heart ✦</div>
+  <h2 class="section-title">A Love Letter to Hayaati</h2>
+  <div class="glass-card letter-wrap">
+    <div class="letter-meta">With every piece of my heart,<br><span id="letterDate"></span></div>
+    <span class="letter-salutation">My dearest Hayaati,</span>
+    <div class="letter-body">
+      <p>Before you, I didn't know that home could be a person. But then you came, and everything made sense. I smile like a fool around you every single time. Your presence is my peace, my happiness, my joy, and from the moment you found your way into my life, that light of yours never left.</p>
+      <p>Your beauty isn't just seen, it's felt. It lives in the way you move, the way you speak, the way you love, radiant from the inside out, "noor ala noor", and completely effortless. My "beauty with brains." Brilliant, creative, kind in a way that just pours out of you naturally. You inspire me more than I know how to express. You make me want to be better, not just for you, but for myself.</p>
+      <p>I try to be "hard guy" but one look at you and I'm gone, helplessly, hopelessly finished for you. You have been patient with me, gentle with me, kind to me even on the days I didn't deserve it, and I carry that. Watching you move through life with such resilience and grace pushes me to do more, because you deserve the whole world.</p>
+      <p>You are my best friend, fooling is our love language and I wouldn't trade it for anything. Whether we're sharing something small and simple or talking until the world goes quiet around us, being with you just feels right. Nobody fills a room or my heart the way you do.</p>
+      <p>Following my heart led me straight to you, and I would follow it there a thousand times over without hesitation. You are my fungi, and without you there is simply no fun to my gi. My world, my love, my queen, my princess, my forever — Hayaatiii. Maseratiiii. Bugattiiii. Body so teaaa. Testimonyyyy. 🤍</p>
+    </div>
+    <div class="letter-close">
+      <p>All my love, always,</p>
+      <span class="letter-sig">Mr Baby 🤍</span>
+    </div>
+  </div>
+</section>
+
+<!-- 21 REASONS WHY -->
+<section id="reasons">
+  <div class="section-eyebrow">✦ For every day I was away ✦</div>
+  <h2 class="section-title">21 Reasons Why<br><span style="font-size:0.48em; color: #9a6f2a; font-family: 'Lora', serif; font-style: italic; font-weight: 600; letter-spacing: 0.05em; opacity: 1;">— for the 21 days I missed on camp —</span></h2>
+  <div class="reasons-tabs">
+    <button class="tab-btn active" onclick="switchTab('sorry')">Why I'm Sorry 🌹</button>
+    <button class="tab-btn" onclick="switchTab('love')">Why I Love You 💜</button>
+  </div>
+  <div class="reasons-grid" id="reasonsGrid"></div>
 </section>
 
 <!-- DAILY MESSAGE -->
@@ -590,61 +662,6 @@
     <p class="daily-msg" id="dailyMsg"></p>
     <span class="pulse-heart">💜</span>
     <div class="daily-sig">Always yours 💕</div>
-  </div>
-</section>
-
-<!-- LOVE LETTER -->
-<section id="letter">
-  <div class="section-eyebrow">✦ Written from the heart ✦</div>
-  <h2 class="section-title">A Love Letter to Hayaati</h2>
-  <div class="glass-card letter-wrap">
-    <div class="letter-meta">With every piece of my heart,<br><span id="letterDate"></span></div>
-    <span class="letter-salutation">My dearest Hayaati,</span>
-    <div class="letter-body">
-      <p>I sit here, searching for words worthy of you — and I find that no language has yet been invented that could fully capture what you mean to me. You are not simply the person I love. You are the reason I understand what love actually is.</p>
-      <p>Before you, I moved through days without truly feeling them. I smiled, I laughed, I lived — but I was only half present, half awake. You changed that. With you, every ordinary moment becomes something I want to remember forever: the way you laugh before the punchline, the warmth of your presence in a quiet room, the way your eyes hold entire worlds I keep wanting to explore.</p>
-      <p>I love the way your mind works — how you see beauty where others don't, how you care so deeply for the people around you, how you're honest even when it's hard, how you carry yourself with a quiet strength that leaves me in awe.</p>
-      <p>I want you to know that choosing you every single day is the easiest decision I've ever made. In a world full of noise and chaos, you are my stillness. You are my home. Wherever you are, that is where I want to be.</p>
-      <p>Thank you for letting me love you. Thank you for loving me back. Thank you for being exactly who you are, because who you are is the most beautiful thing I've ever encountered.</p>
-      <p>This letter is too short. A thousand letters would be too short. But know that every breath I take carries your name, and every heartbeat beats a little louder because of you.</p>
-    </div>
-    <div class="letter-close">
-      <p>Forever and always,</p>
-      <span class="letter-sig">Mr Baby 🌹</span>
-    </div>
-  </div>
-</section>
-
-<!-- 21 REASONS WHY -->
-<section id="reasons">
-  <div class="section-eyebrow">✦ For every day I was away ✦</div>
-  <h2 class="section-title">21 Reasons Why<br><span style="font-size:0.48em; color: #9a6f2a; font-family: 'Lora', serif; font-style: italic; font-weight: 600; letter-spacing: 0.05em; opacity: 1;">— for the 21 days I missed on camp —</span></h2>
-  <div class="reasons-tabs">
-    <button class="tab-btn active" onclick="switchTab('love')">Why I Love You 💜</button>
-    <button class="tab-btn" onclick="switchTab('sorry')">Why I'm Sorry 🌹</button>
-  </div>
-  <div class="reasons-grid" id="reasonsGrid"></div>
-</section>
-
-<!-- APOLOGY LETTER -->
-<section id="apology">
-  <div class="section-eyebrow">✦ From the deepest part of me ✦</div>
-  <h2 class="section-title">My Sincerest Apology</h2>
-  <div class="glass-card letter-wrap">
-    <div class="letter-meta">With a humbled heart,<br><span id="apologyDate"></span></div>
-    <span class="letter-salutation">Hayaati,</span>
-    <div class="letter-body">
-      <p>I owe you more than an apology — I owe you the truth that I haven't always been the person you deserve. I've made mistakes. I've hurt you in ways I wish I could undo. And I need you to know that I carry the weight of that with me every day — not out of guilt alone, but because I love you so much that your pain becomes mine.</p>
-      <p>I'm sorry for the times I was too proud to be vulnerable. For the moments I let my ego stand taller than my love. I'm sorry for every time I made you feel unseen, unheard, or unimportant — because you are the most seen, most heard, most important person in my world.</p>
-      <p>I'm sorry for the words I chose poorly, for the silences that said the wrong thing, for the times I wasn't there when you needed me most. I'm sorry for taking your patience for granted — your patience is a gift I didn't always treat like one.</p>
-      <p>I don't want to just say sorry. I want to be different. I want to be the man who shows up fully — present, honest, tender, and consistent. I'm working on that. Every single day. For you.</p>
-      <p>If you'll let me, I'll spend every day proving that I know what I have in you. You are extraordinary. You are rare. And I refuse to let another moment pass without making sure you feel exactly that.</p>
-      <p>Please forgive me, not just with your words, but in the quiet spaces of your heart. I love you more than I have ever been able to properly express — and I will keep trying until I get it right.</p>
-    </div>
-    <div class="letter-close">
-      <p>Your sincerest love, always,</p>
-      <span class="letter-sig">Forever sorry & forever yours 💛</span>
-    </div>
   </div>
 </section>
 
@@ -731,30 +748,64 @@ function spawnOrb() {
   setTimeout(() => el.remove(), (dur + 4) * 1000);
 }
 
-for (let i = 0; i < 10; i++) setTimeout(() => spawnEmoji(purpleHearts), i * 200);
-for (let i = 0; i < 8;  i++) setTimeout(() => spawnEmoji(pinkHearts, 'pink'), i * 250);
-for (let i = 0; i < 6;  i++) setTimeout(() => spawnEmoji(mixedEmojis), i * 300);
-for (let i = 0; i < 8;  i++) setTimeout(spawnGlassBubble, i * 350);
-for (let i = 0; i < 6;  i++) setTimeout(spawnOrb, i * 220);
-setInterval(() => spawnEmoji(purpleHearts), 1000);
-setInterval(() => spawnEmoji(pinkHearts, 'pink'), 1250);
-setInterval(() => spawnEmoji(mixedEmojis), 1750);
-setInterval(spawnGlassBubble, 1500);
-setInterval(spawnOrb, 1125);
+const isMobile = window.innerWidth <= 600;
+const particleCount = isMobile ? 4 : 10;
+const bubbleCount = isMobile ? 3 : 8;
+const orbCount = isMobile ? 3 : 6;
 
-// ── Section switcher ──
-function showSection(id) {
-  document.querySelectorAll('section').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  const sec = document.getElementById(id);
-  sec.style.display = 'flex';
-  requestAnimationFrame(() => sec.classList.add('active'));
-  document.querySelectorAll('nav button').forEach(b => {
-    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) b.classList.add('active');
-  });
-  spawnPetals();
-  if (id === 'art') setTimeout(() => drawArt('hearts', document.querySelector('.art-btn')), 100);
+for (let i = 0; i < particleCount; i++) setTimeout(() => spawnEmoji(purpleHearts), i * 200);
+for (let i = 0; i < particleCount - 2; i++) setTimeout(() => spawnEmoji(pinkHearts, 'pink'), i * 250);
+for (let i = 0; i < Math.max(2, particleCount - 4); i++) setTimeout(() => spawnEmoji(mixedEmojis), i * 300);
+for (let i = 0; i < bubbleCount; i++) setTimeout(spawnGlassBubble, i * 350);
+for (let i = 0; i < orbCount; i++) setTimeout(spawnOrb, i * 220);
+
+if (!isMobile) {
+  setInterval(() => spawnEmoji(purpleHearts), 1000);
+  setInterval(() => spawnEmoji(pinkHearts, 'pink'), 1250);
+  setInterval(() => spawnEmoji(mixedEmojis), 1750);
+  setInterval(spawnGlassBubble, 1500);
+  setInterval(spawnOrb, 1125);
+} else {
+  setInterval(() => spawnEmoji(purpleHearts), 3000);
+  setInterval(spawnGlassBubble, 4000);
 }
+
+// ── Smooth scroll nav ──
+function goTo(id) {
+  const el = document.querySelector(id);
+  if (!el) return;
+  const navHeight = document.querySelector('nav').offsetHeight;
+  const top = el.getBoundingClientRect().top + window.pageYOffset - navHeight;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+
+// ── Scroll-based nav highlight ──
+function updateActiveNav() {
+  const sections = document.querySelectorAll('section');
+  const navBtns = document.querySelectorAll('nav button');
+  let current = 'hero';
+  sections.forEach(s => {
+    if (s.getBoundingClientRect().top <= window.innerHeight * 0.4) current = s.id;
+  });
+  navBtns.forEach(b => {
+    const onclick = b.getAttribute('onclick') || '';
+    if (onclick.includes(current)) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+}
+window.addEventListener('scroll', updateActiveNav);
+updateActiveNav();
+
+// start art when visible
+const artSection = document.getElementById('art');
+let artStarted = false;
+const artObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && !artStarted) {
+    artStarted = true;
+    drawArt('hearts', document.querySelector('.art-btn'));
+  }
+}, { threshold: 0.1 });
+artObserver.observe(artSection);
 function spawnPetals() {
   const petals = ['💜','🩷','🌸','💕','✨','🌷','💗','🦋'];
   for (let i = 0; i < 11; i++) {
@@ -867,7 +918,7 @@ const sorryReasons = [
   "Most of all, I'm sorry because you are Hayaati, my love, my peace, my world — and hurting you was never my intention. I deeply regret my actions, and I promise to grow and be better for you"
 ];
 
-let currentTab = 'love';
+let currentTab = 'sorry';
 const grid = document.getElementById('reasonsGrid');
 
 function renderReasons(tab) {
@@ -880,7 +931,7 @@ function renderReasons(tab) {
     grid.appendChild(card);
   });
 }
-renderReasons('love');
+renderReasons('sorry');
 
 function switchTab(tab) {
   currentTab = tab;
@@ -1070,8 +1121,9 @@ function startStars() {
 }
 
 // Init
-document.querySelectorAll('section').forEach(s => { if (!s.classList.contains('active')) s.style.display = 'none'; });
-drawArt('hearts', document.querySelector('.art-btn'));
+if (!isMobile) {
+  drawArt('hearts', document.querySelector('.art-btn'));
+}
 </script>
 </body>
 </html>
