@@ -4,25 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Hayaati 💕</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --p1: #f3eeff;
     --p2: #e8d8ff;
     --p3: #c9a8e8;
-    --p4: #9b6cc8;
-    --p5: #7a4aaa;
-    --p6: #5c3088;
-    --gold: #b8914a;
+    --p4: #5c3088;
+    --p5: #5c3088;
+    --p6: #3d1a6e;
+    --gold: #9a6f2a;
     --pink: #e87abf;
     --white: #ffffff;
     --glass: rgba(255,255,255,0.28);
     --glass-border: rgba(200,160,240,0.45);
     --glass-hover: rgba(255,255,255,0.42);
     --shadow-purple: rgba(155,108,200,0.2);
-    --text-main: #3d1f6e;
-    --text-soft: rgba(70,35,110,0.82);
-    --text-muted: rgba(100,60,150,0.6);
+    --text-main: #3d1a6e;
+    --text-soft: rgba(45,10,90,0.92);
+    --text-muted: rgba(60,20,110,0.75);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -99,20 +99,20 @@
     bottom: -20px;
   }
   .particle.orb {
-    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.8), rgba(200,160,255,0.3));
-    border: 1px solid rgba(200,160,255,0.4);
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5), rgba(200,160,255,0.12));
+    border: 1px solid rgba(200,160,255,0.18);
     backdrop-filter: blur(4px);
-    box-shadow: 0 2px 12px rgba(155,108,200,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+    box-shadow: 0 2px 8px rgba(155,108,200,0.08), inset 0 1px 0 rgba(255,255,255,0.3);
   }
   .particle.pink-orb {
-    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.8), rgba(232,122,191,0.3));
-    border: 1px solid rgba(232,122,191,0.4);
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.5), rgba(232,122,191,0.12));
+    border: 1px solid rgba(232,122,191,0.18);
     backdrop-filter: blur(4px);
-    box-shadow: 0 2px 12px rgba(232,122,191,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+    box-shadow: 0 2px 8px rgba(232,122,191,0.08), inset 0 1px 0 rgba(255,255,255,0.3);
   }
   @keyframes particleDrift {
-    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.9; }
-    50% { opacity: 0.7; transform: translateY(-50vh) rotate(180deg) scale(1.05); }
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.3; }
+    50% { opacity: 0.2; transform: translateY(-50vh) rotate(180deg) scale(1.05); }
     100% { transform: translateY(-110vh) rotate(360deg) scale(0.8); opacity: 0; }
   }
   .heart-float {
@@ -120,13 +120,13 @@
     animation: heartRise linear infinite;
     bottom: -30px;
     opacity: 0;
-    filter: drop-shadow(0 2px 6px rgba(155,108,200,0.4));
+    filter: drop-shadow(0 2px 4px rgba(155,108,200,0.15));
   }
-  .heart-float.pink { filter: drop-shadow(0 2px 6px rgba(232,122,191,0.5)); }
+  .heart-float.pink { filter: drop-shadow(0 2px 4px rgba(232,122,191,0.15)); }
   @keyframes heartRise {
     0% { opacity: 0; transform: translateY(0) scale(0.8) rotate(-10deg); }
-    10% { opacity: 0.9; }
-    50% { opacity: 0.7; transform: translateY(-50vh) scale(1) rotate(10deg); }
+    10% { opacity: 0.3; }
+    50% { opacity: 0.2; transform: translateY(-50vh) scale(1) rotate(10deg); }
     100% { opacity: 0; transform: translateY(-105vh) scale(0.6) rotate(-5deg); }
   }
   .glass-heart {
@@ -137,8 +137,8 @@
   }
   @keyframes glassBubble {
     0% { opacity: 0; transform: translateY(0) scale(0.6); }
-    15% { opacity: 0.8; }
-    85% { opacity: 0.5; }
+    15% { opacity: 0.25; }
+    85% { opacity: 0.15; }
     100% { opacity: 0; transform: translateY(-110vh) scale(1.1); }
   }
   .distant {
@@ -192,11 +192,12 @@
   /* ── SECTIONS ── */
   section {
     min-height: 100vh;
+    height: auto;
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8rem 2rem 4rem;
+    padding: 8rem 2rem 6rem;
     position: relative; z-index: 1;
   }
   section.active { display: flex; animation: sectionIn 0.6s ease both; }
@@ -256,18 +257,21 @@
     box-shadow: 0 4px 20px rgba(155,108,200,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
   }
   .hero-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(4.5rem, 14vw, 10rem);
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(5rem, 18vw, 14rem);
     background: linear-gradient(135deg, #7a4aaa 0%, #b8914a 45%, #9b6cc8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    line-height: 1.1;
+    line-height: 1.3;
     animation: fadeUp 1s 0.2s ease both;
     filter: drop-shadow(0 4px 20px rgba(155,108,200,0.25));
+    padding: 0 1rem;
+    width: 100%;
+    text-align: center;
   }
   .hero-sub {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 1.25rem;
     font-style: italic;
     color: var(--p5);
@@ -309,7 +313,7 @@
     font-weight: 500;
   }
   .section-title {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Dancing Script', cursive;
     font-size: clamp(2.8rem, 7vw, 5rem);
     color: var(--p5);
     margin-bottom: 2.5rem;
@@ -328,7 +332,7 @@
     text-align: center;
   }
   .quote-mark {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 6rem;
     color: var(--p3);
     opacity: 0.4;
@@ -337,7 +341,7 @@
     margin-bottom: 1rem;
   }
   .daily-msg {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 1.35rem;
     font-style: italic;
     line-height: 1.9;
@@ -360,7 +364,7 @@
     70% { transform: scale(1); }
   }
   .daily-sig {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Dancing Script', cursive;
     font-size: 2.2rem;
     color: var(--p4);
     text-align: center;
@@ -369,8 +373,6 @@
   /* ── LETTERS ── */
   .letter-wrap {
     max-width: 720px; width: 100%;
-    max-height: 68vh;
-    overflow-y: auto;
   }
   .letter-wrap::-webkit-scrollbar { width: 4px; }
   .letter-wrap::-webkit-scrollbar-thumb { background: var(--p3); border-radius: 2px; }
@@ -380,17 +382,17 @@
     color: var(--gold);
     font-style: italic;
     margin-bottom: 2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
   }
   .letter-salutation {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Dancing Script', cursive;
     font-size: 2.5rem;
     color: var(--p4);
     margin-bottom: 1.8rem;
     display: block;
   }
   .letter-body p {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 1.1rem;
     line-height: 2.1;
     color: var(--text-soft);
@@ -398,9 +400,9 @@
     margin-bottom: 1.3rem;
   }
   .letter-close { margin-top: 2rem; }
-  .letter-close p { color: var(--p5); font-size: 1rem; font-family: 'Playfair Display', serif; font-style: italic; }
+  .letter-close p { color: var(--p5); font-size: 1rem; font-family: 'Lora', serif; font-style: italic; }
   .letter-sig {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Dancing Script', cursive;
     font-size: 3rem;
     color: var(--p4);
     margin-top: 0.5rem;
@@ -443,8 +445,6 @@
     gap: 0.75rem;
     max-width: 700px;
     width: 100%;
-    max-height: 60vh;
-    overflow-y: auto;
     padding-right: 0.5rem;
   }
   .reasons-grid::-webkit-scrollbar { width: 4px; }
@@ -473,16 +473,18 @@
     box-shadow: 0 6px 28px rgba(155,108,200,0.14), inset 0 1px 0 rgba(255,255,255,0.7);
   }
   .reason-num {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Dancing Script', cursive;
     font-size: 2.2rem;
-    color: var(--p4);
+    color: var(--p6);
     min-width: 2.5rem;
     line-height: 1;
-    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    align-self: stretch;
   }
-  .sorry-num { color: var(--gold); }
+  .sorry-num { color: #a06820; }
   .reason-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 1rem;
     line-height: 1.75;
     color: var(--text-soft);
@@ -526,7 +528,7 @@
   .art-hint {
     font-style: italic; color: var(--text-muted);
     font-size: 0.9rem; text-align: center;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
   }
 
   /* ── UTILS ── */
@@ -563,10 +565,10 @@
 
 <nav>
   <button class="active" onclick="showSection('hero')">Home</button>
-  <button onclick="showSection('daily')">Daily Message</button>
+  <button onclick="showSection('apology')">Apology Letter</button>
   <button onclick="showSection('letter')">Love Letter</button>
   <button onclick="showSection('reasons')">21 Reasons Why</button>
-  <button onclick="showSection('apology')">Apology Letter</button>
+  <button onclick="showSection('daily')">Daily Message</button>
   <button onclick="showSection('art')">Love Art</button>
 </nav>
 
@@ -575,7 +577,7 @@
   <div class="hero-badge">✦ A universe made just for you ✦</div>
   <h1 class="hero-title">Hayaati</h1>
   <p class="hero-sub">"You are my life, my heartbeat, my everything"</p>
-  <button class="neu-btn" onclick="showSection('daily')">Open My Heart &rarr;</button>
+  <button class="neu-btn" onclick="showSection('apology')">Open My Heart &rarr;</button>
 </section>
 
 <!-- DAILY MESSAGE -->
@@ -608,7 +610,7 @@
     </div>
     <div class="letter-close">
       <p>Forever and always,</p>
-      <span class="letter-sig">Yours 🌹</span>
+      <span class="letter-sig">Mr Baby 🌹</span>
     </div>
   </div>
 </section>
@@ -616,7 +618,7 @@
 <!-- 21 REASONS WHY -->
 <section id="reasons">
   <div class="section-eyebrow">✦ For every day I was away ✦</div>
-  <h2 class="section-title">21 Reasons Why<br><span style="font-size:0.55em; color: var(--gold);">for the 21 days I missed on camp</span></h2>
+  <h2 class="section-title">21 Reasons Why<br><span style="font-size:0.48em; color: #9a6f2a; font-family: 'Lora', serif; font-style: italic; font-weight: 600; letter-spacing: 0.05em; opacity: 1;">— for the 21 days I missed on camp —</span></h2>
   <div class="reasons-tabs">
     <button class="tab-btn active" onclick="switchTab('love')">Why I Love You 💜</button>
     <button class="tab-btn" onclick="switchTab('sorry')">Why I'm Sorry 🌹</button>
