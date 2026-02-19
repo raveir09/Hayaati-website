@@ -4,358 +4,782 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Hayaati 💕</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root {
-    --rose: #c8536a;
-    --blush: #f4d0d8;
-    --deep: #1a0a10;
-    --petal: #f9eaed;
-    --gold: #c9a96e;
-    --muted: #8a5a66;
+    --p1: #f3eeff;
+    --p2: #e8d8ff;
+    --p3: #c9a8e8;
+    --p4: #9b6cc8;
+    --p5: #7a4aaa;
+    --p6: #5c3088;
+    --gold: #b8914a;
+    --pink: #e87abf;
+    --white: #ffffff;
+    --glass: rgba(255,255,255,0.28);
+    --glass-border: rgba(200,160,240,0.45);
+    --glass-hover: rgba(255,255,255,0.42);
+    --shadow-purple: rgba(155,108,200,0.2);
+    --text-main: #3d1f6e;
+    --text-soft: rgba(70,35,110,0.82);
+    --text-muted: rgba(100,60,150,0.6);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+
   body {
-    background: var(--deep);
-    color: var(--petal);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(200,160,255,0.55) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 80%, rgba(232,122,191,0.35) 0%, transparent 45%),
+      radial-gradient(ellipse at 60% 10%, rgba(180,140,255,0.4) 0%, transparent 40%),
+      linear-gradient(150deg, #f0e6ff 0%, #ead5ff 35%, #f5ecff 65%, #fdf8ff 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
     overflow-x: hidden;
     cursor: none;
   }
 
+  body::before {
+    content: '';
+    position: fixed;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(180,130,240,0.3) 0%, rgba(232,122,191,0.1) 50%, transparent 70%);
+    top: -150px; left: -150px;
+    pointer-events: none; z-index: 0;
+    animation: orbFloat 14s ease-in-out infinite;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,122,191,0.25) 0%, rgba(155,108,200,0.15) 50%, transparent 70%);
+    bottom: -100px; right: -100px;
+    pointer-events: none; z-index: 0;
+    animation: orbFloat 18s ease-in-out infinite reverse;
+  }
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(50px, 30px) scale(1.08); }
+    66% { transform: translate(-20px, 50px) scale(0.95); }
+  }
+
+  /* ── CURSOR ── */
   .cursor {
-    width: 12px; height: 12px;
-    background: var(--rose);
+    width: 16px; height: 16px;
+    border: 2px solid var(--p4);
     border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.15s ease;
-    mix-blend-mode: screen;
+    position: fixed; pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    backdrop-filter: blur(2px);
   }
-  .cursor-trail {
-    width: 30px; height: 30px;
-    border: 1px solid var(--rose);
+  .cursor.hover {
+    background: rgba(176,111,212,0.3);
+    transform: translate(-50%,-50%) scale(1.8);
+    border-color: var(--p5);
+  }
+  .cursor-dot {
+    width: 5px; height: 5px;
+    background: var(--gold);
     border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9998;
-    transition: all 0.3s ease;
-    opacity: 0.4;
+    position: fixed; pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
   }
 
+  /* ── PARTICLES ── */
+  .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: particleDrift linear infinite;
+    bottom: -20px;
+  }
+  .particle.orb {
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.8), rgba(200,160,255,0.3));
+    border: 1px solid rgba(200,160,255,0.4);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 12px rgba(155,108,200,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .particle.pink-orb {
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.8), rgba(232,122,191,0.3));
+    border: 1px solid rgba(232,122,191,0.4);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 12px rgba(232,122,191,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  @keyframes particleDrift {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.9; }
+    50% { opacity: 0.7; transform: translateY(-50vh) rotate(180deg) scale(1.05); }
+    100% { transform: translateY(-110vh) rotate(360deg) scale(0.8); opacity: 0; }
+  }
+  .heart-float {
+    position: absolute;
+    animation: heartRise linear infinite;
+    bottom: -30px;
+    opacity: 0;
+    filter: drop-shadow(0 2px 6px rgba(155,108,200,0.4));
+  }
+  .heart-float.pink { filter: drop-shadow(0 2px 6px rgba(232,122,191,0.5)); }
+  @keyframes heartRise {
+    0% { opacity: 0; transform: translateY(0) scale(0.8) rotate(-10deg); }
+    10% { opacity: 0.9; }
+    50% { opacity: 0.7; transform: translateY(-50vh) scale(1) rotate(10deg); }
+    100% { opacity: 0; transform: translateY(-105vh) scale(0.6) rotate(-5deg); }
+  }
+  .glass-heart {
+    position: absolute;
+    animation: glassBubble linear infinite;
+    bottom: -40px;
+    opacity: 0;
+  }
+  @keyframes glassBubble {
+    0% { opacity: 0; transform: translateY(0) scale(0.6); }
+    15% { opacity: 0.8; }
+    85% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(-110vh) scale(1.1); }
+  }
+  .distant {
+    filter: blur(1.5px) opacity(0.38) !important;
+    font-size: 0.55rem !important;
+    z-index: -1 !important;
+  }
+  .distant.glass-heart { filter: blur(2px) opacity(0.28) !important; font-size: 0.7rem !important; }
+  .distant.particle { opacity: 0.25 !important; filter: blur(1px); }
+
+  /* ── NAV ── */
   nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; justify-content: center;
-    gap: 2rem; padding: 1.2rem 2rem;
-    background: linear-gradient(to bottom, rgba(26,10,16,0.95), transparent);
-    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
-    flex-wrap: wrap;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.1rem 2rem;
+    display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-bottom: 1px solid rgba(200,160,240,0.3);
+    box-shadow: 0 4px 30px rgba(155,108,200,0.1), inset 0 1px 0 rgba(255,255,255,0.5);
   }
-  nav a { color: var(--blush); text-decoration: none; opacity: 0.7; transition: all 0.3s; }
-  nav a:hover { opacity: 1; color: var(--gold); }
+  nav button {
+    background: rgba(210,185,245,0.55);
+    border: 1px solid rgba(200,160,240,0.5);
+    color: var(--p5);
+    padding: 0.55rem 1.3rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    cursor: none;
+    backdrop-filter: blur(16px) saturate(140%);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(155,108,200,0.12), inset 0 1px 0 rgba(255,255,255,0.55);
+  }
+  nav button:hover {
+    background: rgba(220,195,255,0.72);
+    border-color: var(--p3);
+    color: var(--p5);
+    box-shadow: 0 4px 20px rgba(155,108,200,0.2), inset 0 1px 0 rgba(255,255,255,0.65);
+    transform: translateY(-2px);
+  }
+  nav button.active {
+    background: rgba(195,155,235,0.65);
+    border-color: var(--p3);
+    color: var(--p5);
+    box-shadow: 0 4px 20px rgba(155,108,200,0.22), inset 0 1px 0 rgba(255,255,255,0.55);
+  }
 
-  #hero {
-    min-height: 100vh; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    position: relative; overflow: hidden; text-align: center; padding: 2rem;
+  /* ── SECTIONS ── */
+  section {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative; z-index: 1;
   }
-
-  .petals-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
-  .petal-particle {
-    position: absolute; width: 6px; height: 10px;
-    background: radial-gradient(ellipse, var(--rose), transparent);
-    border-radius: 50% 50% 50% 0; opacity: 0;
-    animation: fallPetal linear infinite;
-  }
-  @keyframes fallPetal {
-    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.6; } 90% { opacity: 0.3; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-  }
-
-  .hero-content { position: relative; z-index: 1; }
-  .hero-subtitle {
-    font-size: 0.7rem; letter-spacing: 0.4em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 1.5rem;
-    animation: fadeUp 1s ease 0.3s both;
-  }
-  .hero-title {
-    font-family: 'Pinyon Script', cursive;
-    font-size: clamp(5rem, 15vw, 11rem);
-    color: var(--blush); line-height: 0.9;
-    animation: fadeUp 1s ease 0.6s both;
-    text-shadow: 0 0 80px rgba(200,83,106,0.3);
-  }
-  .hero-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: clamp(1rem, 3vw, 1.4rem);
-    color: var(--muted); margin-top: 1.5rem;
-    animation: fadeUp 1s ease 0.9s both;
-  }
-  .heart-pulse {
-    font-size: 2rem; margin-top: 3rem;
-    animation: fadeUp 1s ease 1.2s both, heartbeat 1.5s ease infinite;
-    display: inline-block;
-  }
-  @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-  .scroll-hint {
-    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--muted); animation: bounce 2s ease infinite;
-  }
-  @keyframes bounce {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-8px); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
+  section.active { display: flex; animation: sectionIn 0.6s ease both; }
+  @keyframes sectionIn {
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  section { padding: 6rem 2rem; max-width: 900px; margin: 0 auto; }
-  .section-label {
-    font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 0.8rem; display: block;
+  /* ── GLASS CARD ── */
+  .glass-card {
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(220,180,255,0.5);
+    border-radius: 32px;
+    backdrop-filter: blur(36px) saturate(160%);
+    -webkit-backdrop-filter: blur(36px) saturate(160%);
+    box-shadow:
+      0 8px 48px rgba(155,108,200,0.15),
+      0 2px 8px rgba(155,108,200,0.08),
+      inset 0 2px 0 rgba(255,255,255,0.65),
+      inset 0 -1px 0 rgba(200,160,240,0.2),
+      inset 1px 0 0 rgba(255,255,255,0.4),
+      inset -1px 0 0 rgba(255,255,255,0.3);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -60%; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.9) 40%, rgba(220,180,255,0.8) 60%, transparent 100%);
+  }
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 50%, rgba(200,160,240,0.05) 100%);
+    pointer-events: none;
+    border-radius: 32px;
+  }
+
+  /* ── HERO ── */
+  #hero { text-align: center; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.28);
+    border: 1px solid rgba(220,180,255,0.5);
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    backdrop-filter: blur(20px) saturate(150%);
+    margin-bottom: 2rem;
+    animation: fadeUp 1s ease both;
+    box-shadow: 0 4px 20px rgba(155,108,200,0.12), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  .hero-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(4.5rem, 14vw, 10rem);
+    background: linear-gradient(135deg, #7a4aaa 0%, #b8914a 45%, #9b6cc8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    animation: fadeUp 1s 0.2s ease both;
+    filter: drop-shadow(0 4px 20px rgba(155,108,200,0.25));
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: var(--p5);
+    margin: 1.5rem 0 3rem;
+    animation: fadeUp 1s 0.4s ease both;
+    opacity: 0.9;
+  }
+  .neu-btn {
+    background: rgba(200,170,240,0.55);
+    border: 1px solid rgba(200,160,240,0.6);
+    border-radius: 50px;
+    color: var(--p6);
+    padding: 1rem 2.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: none;
+    animation: fadeUp 1s 0.6s ease both;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(20px) saturate(150%);
+    box-shadow: 0 4px 24px rgba(155,108,200,0.2), inset 0 2px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(160,110,210,0.2);
+  }
+  .neu-btn:hover {
+    background: rgba(200,170,240,0.72);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(155,108,200,0.28), inset 0 2px 0 rgba(255,255,255,0.6);
+    border-color: rgba(180,130,230,0.75);
+  }
+
+  /* ── LABELS ── */
+  .section-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
   }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 300;
-    line-height: 1.1; margin-bottom: 3rem; color: var(--blush);
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    color: var(--p5);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    line-height: 1.2;
   }
 
-  #daily { text-align: center; }
-  .daily-card {
-    background: linear-gradient(135deg, rgba(200,83,106,0.08), rgba(201,169,110,0.04));
-    border: 1px solid rgba(200,83,106,0.2); border-radius: 2px;
-    padding: 3rem 2.5rem; position: relative; overflow: hidden;
+  /* ── DAILY ── */
+  .message-card { max-width: 700px; width: 100%; }
+  .daily-date {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    text-align: center;
   }
-  .daily-card::before {
-    content: '\201C'; font-family: 'Pinyon Script', cursive;
-    font-size: 10rem; color: rgba(200,83,106,0.08);
-    position: absolute; top: -2rem; left: 1rem; line-height: 1;
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: var(--p3);
+    opacity: 0.4;
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 1rem;
   }
-  .daily-date { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
-  .daily-message-text {
-    font-family: 'Cormorant Garamond', serif; font-style: italic;
-    font-size: clamp(1.1rem, 3vw, 1.5rem); line-height: 1.8;
-    color: var(--petal); position: relative; z-index: 1;
+  .daily-msg {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    line-height: 1.9;
+    color: var(--text-main);
+    text-align: center;
+    margin-bottom: 2rem;
   }
-  .daily-signature { margin-top: 1.5rem; font-family: 'Pinyon Script', cursive; font-size: 1.8rem; color: var(--rose); }
+  .pulse-heart {
+    text-align: center;
+    font-size: 2.2rem;
+    animation: heartBeat 1.4s ease infinite;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.2); }
+    70% { transform: scale(1); }
+  }
+  .daily-sig {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: var(--p4);
+    text-align: center;
+  }
 
-  .letter-body {
-    background: rgba(244,208,216,0.04);
-    border-left: 2px solid rgba(200,83,106,0.3);
-    padding: 2.5rem 2.5rem 2.5rem 3rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1rem, 2.5vw, 1.15rem); line-height: 2;
-    color: rgba(249,234,237,0.9);
+  /* ── LETTERS ── */
+  .letter-wrap {
+    max-width: 720px; width: 100%;
+    max-height: 68vh;
+    overflow-y: auto;
   }
-  .letter-body p { margin-bottom: 1.5rem; }
-  .letter-body .salutation {
-    font-family: 'Pinyon Script', cursive; font-size: 2rem;
-    color: var(--rose); margin-bottom: 1rem; display: block;
+  .letter-wrap::-webkit-scrollbar { width: 4px; }
+  .letter-wrap::-webkit-scrollbar-thumb { background: var(--p3); border-radius: 2px; }
+  .letter-meta {
+    text-align: right;
+    font-size: 0.9rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-family: 'Playfair Display', serif;
   }
-  .letter-body .closing { font-family: 'Pinyon Script', cursive; font-size: 2rem; color: var(--rose); margin-top: 2rem; }
+  .letter-salutation {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--p4);
+    margin-bottom: 1.8rem;
+    display: block;
+  }
+  .letter-body p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    line-height: 2.1;
+    color: var(--text-soft);
+    font-style: italic;
+    margin-bottom: 1.3rem;
+  }
+  .letter-close { margin-top: 2rem; }
+  .letter-close p { color: var(--p5); font-size: 1rem; font-family: 'Playfair Display', serif; font-style: italic; }
+  .letter-sig {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--p4);
+    margin-top: 0.5rem;
+    display: block;
+  }
 
-  .reasons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+  /* ── 21 REASONS ── */
+  .reasons-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(220,180,255,0.45);
+    border-radius: 50px;
+    padding: 0.4rem;
+    backdrop-filter: blur(28px) saturate(150%);
+    box-shadow: 0 4px 20px rgba(155,108,200,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: none;
+    transition: all 0.3s;
+  }
+  .tab-btn.active {
+    background: rgba(195,155,235,0.6);
+    color: var(--p5);
+    border: 1px solid rgba(180,140,225,0.5);
+    box-shadow: 0 2px 12px rgba(155,108,200,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .reasons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 700px;
+    width: 100%;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+  .reasons-grid::-webkit-scrollbar { width: 4px; }
+  .reasons-grid::-webkit-scrollbar-thumb { background: rgba(200,160,240,0.4); border-radius: 2px; }
   .reason-card {
-    background: rgba(200,83,106,0.05);
-    border: 1px solid rgba(200,83,106,0.15); border-radius: 2px;
-    padding: 1.5rem; transition: all 0.4s ease; position: relative; overflow: hidden; cursor: default;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(220,180,255,0.4);
+    border-radius: 20px;
+    padding: 1.2rem 1.6rem;
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    backdrop-filter: blur(24px) saturate(150%);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 16px rgba(155,108,200,0.08), inset 0 1px 0 rgba(255,255,255,0.55);
+    position: relative; overflow: hidden;
   }
-  .reason-card::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(200,83,106,0.1), transparent);
-    opacity: 0; transition: opacity 0.4s;
+  .reason-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
   }
-  .reason-card:hover { border-color: rgba(200,83,106,0.5); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(200,83,106,0.1); }
-  .reason-card:hover::after { opacity: 1; }
-  .reason-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: rgba(200,83,106,0.2); font-weight: 300; line-height: 1; margin-bottom: 0.5rem; display: block; }
-  .reason-text { font-size: 0.85rem; line-height: 1.7; color: var(--blush); position: relative; z-index: 1; }
+  .reason-card:hover {
+    background: rgba(255,255,255,0.35);
+    border-color: rgba(200,150,240,0.6);
+    transform: translateX(8px);
+    box-shadow: 0 6px 28px rgba(155,108,200,0.14), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  .reason-num {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: var(--p4);
+    min-width: 2.5rem;
+    line-height: 1;
+    opacity: 0.9;
+  }
+  .sorry-num { color: var(--gold); }
+  .reason-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-soft);
+    font-style: italic;
+    padding-top: 0.35rem;
+  }
 
-  #sorry .reason-card { background: rgba(201,169,110,0.04); border-color: rgba(201,169,110,0.15); }
-  #sorry .reason-card:hover { border-color: rgba(201,169,110,0.4); box-shadow: 0 20px 40px rgba(201,169,110,0.08); }
-  #sorry .reason-num { color: rgba(201,169,110,0.2); }
-  #apology .letter-body { border-left-color: rgba(201,169,110,0.4); }
-
-  #art { text-align: center; }
-  .art-canvas-wrap { position: relative; display: inline-block; width: 100%; max-width: 600px; }
-  canvas#loveCanvas { width: 100%; border-radius: 2px; display: block; }
-  .art-controls { display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+  /* ── ART ── */
+  .art-wrap {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 1.5rem;
+    width: 100%; max-width: 540px;
+  }
+  canvas {
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(155,108,200,0.2), 0 0 0 1px rgba(180,140,220,0.3);
+    cursor: none; max-width: 100%;
+  }
+  .art-controls { display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center; }
   .art-btn {
-    background: transparent; border: 1px solid rgba(200,83,106,0.4); color: var(--blush);
-    padding: 0.6rem 1.8rem; font-family: 'Jost', sans-serif; font-size: 0.7rem;
-    letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; border-radius: 1px;
+    background: rgba(210,185,245,0.58);
+    border: 1px solid rgba(200,160,240,0.5);
+    color: var(--p5);
+    padding: 0.55rem 1.2rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: none;
+    backdrop-filter: blur(20px) saturate(150%);
+    transition: all 0.3s;
+    box-shadow: 0 2px 12px rgba(155,108,200,0.12), inset 0 1px 0 rgba(255,255,255,0.5);
   }
-  .art-btn:hover { background: rgba(200,83,106,0.15); border-color: var(--rose); color: #fff; }
-  .art-btn.active { background: rgba(200,83,106,0.2); border-color: var(--rose); }
-
-  .divider { text-align: center; padding: 2rem 0; color: rgba(200,83,106,0.3); font-size: 1.2rem; letter-spacing: 1rem; }
-
-  footer { text-align: center; padding: 4rem 2rem; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); border-top: 1px solid rgba(200,83,106,0.1); }
-  footer .big-script { font-family: 'Pinyon Script', cursive; font-size: 3rem; color: var(--rose); display: block; margin-bottom: 1rem; text-transform: none; letter-spacing: 0; }
-
-  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  .floating-hearts { position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
-  .fheart { position: absolute; bottom: -50px; animation: floatUp linear infinite; opacity: 0; }
-  @keyframes floatUp {
-    0% { transform: translateY(0) scale(0.5); opacity: 0; }
-    20% { opacity: 0.3; } 80% { opacity: 0.2; }
-    100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+  .art-btn:hover, .art-btn.active {
+    background: rgba(210,185,245,0.82);
+    border-color: rgba(180,130,230,0.65);
+    color: var(--p6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(155,108,200,0.2), inset 0 1px 0 rgba(255,255,255,0.6);
   }
+  .art-hint {
+    font-style: italic; color: var(--text-muted);
+    font-size: 0.9rem; text-align: center;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ── UTILS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .petal-fall {
+    position: fixed; pointer-events: none; z-index: 2;
+    animation: petalDrop linear both;
+  }
+  @keyframes petalDrop {
+    0% { opacity: 0.9; transform: rotate(0deg); }
+    100% { opacity: 0; transform: rotate(540deg) translateX(40px); top: 110vh !important; }
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: rgba(240,230,255,0.5); }
+  ::-webkit-scrollbar-thumb { background: var(--p3); border-radius: 3px; }
 
   @media (max-width: 600px) {
-    nav { gap: 1rem; font-size: 0.58rem; }
-    .reasons-grid { grid-template-columns: 1fr 1fr; }
+    body { font-size: 16px; }
+    nav button { padding: 0.4rem 0.8rem; font-size: 0.65rem; }
+    .glass-card { padding: 2rem 1.4rem; }
+    .reasons-tabs { flex-direction: column; border-radius: 20px; }
   }
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
-<div class="cursor-trail" id="cursorTrail"></div>
-<div class="floating-hearts" id="floatingHearts"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="particles" id="particles"></div>
 
 <nav>
-  <a href="#daily">Daily Message</a>
-  <a href="#letter">Love Letter</a>
-  <a href="#reasons">21 Reasons</a>
-  <a href="#sorry">21 Apologies</a>
-  <a href="#apology">Apology Letter</a>
-  <a href="#art">Love Art</a>
+  <button class="active" onclick="showSection('hero')">Home</button>
+  <button onclick="showSection('daily')">Daily Message</button>
+  <button onclick="showSection('letter')">Love Letter</button>
+  <button onclick="showSection('reasons')">21 Reasons Why</button>
+  <button onclick="showSection('apology')">Apology Letter</button>
+  <button onclick="showSection('art')">Love Art</button>
 </nav>
 
-<section id="hero">
-  <div class="petals-bg" id="petalsBg"></div>
-  <div class="hero-content">
-    <p class="hero-subtitle">A universe made just for you</p>
-    <h1 class="hero-title">Hayaati</h1>
-    <p class="hero-tagline">You are my life, my heartbeat, my everything</p>
-    <span class="heart-pulse">🌹</span>
-  </div>
-  <p class="scroll-hint">↓ explore ↓</p>
+<!-- HERO -->
+<section id="hero" class="active">
+  <div class="hero-badge">✦ A universe made just for you ✦</div>
+  <h1 class="hero-title">Hayaati</h1>
+  <p class="hero-sub">"You are my life, my heartbeat, my everything"</p>
+  <button class="neu-btn" onclick="showSection('daily')">Open My Heart &rarr;</button>
 </section>
 
+<!-- DAILY MESSAGE -->
 <section id="daily">
-  <span class="section-label reveal">Every single day</span>
-  <h2 class="section-title reveal">Today's Message<br>for You</h2>
-  <div class="daily-card reveal">
-    <p class="daily-date" id="todayDate"></p>
-    <p class="daily-message-text" id="dailyMsg"></p>
-    <p class="daily-signature">Always yours 💕</p>
+  <div class="section-eyebrow">✦ Every single day ✦</div>
+  <h2 class="section-title">Today's Message For You</h2>
+  <div class="glass-card message-card">
+    <div class="daily-date" id="todayDate"></div>
+    <span class="quote-mark">"</span>
+    <p class="daily-msg" id="dailyMsg"></p>
+    <span class="pulse-heart">💜</span>
+    <div class="daily-sig">Always yours 💕</div>
   </div>
 </section>
 
-<div class="divider">· · · ♡ · · ·</div>
-
+<!-- LOVE LETTER -->
 <section id="letter">
-  <span class="section-label reveal">Written from the heart</span>
-  <h2 class="section-title reveal">A Love Letter<br>to Hayaati</h2>
-  <div class="letter-body reveal">
-    <span class="salutation">My dearest Hayaati,</span>
-    <p>I sit here, searching for words worthy of you — and I find that no language has yet been invented that could fully capture what you mean to me. You are not simply the person I love. You are the reason I understand what love actually is.</p>
-    <p>Before you, I moved through days without truly feeling them. I smiled, I laughed, I lived — but I was only half present, half awake. You changed that. With you, every ordinary moment becomes something I want to remember forever: the way you laugh before the punchline, the warmth of your presence in a quiet room, the way your eyes hold entire worlds I keep wanting to explore.</p>
-    <p>I love the way your mind works — how you see beauty where others don't, how you care so deeply for the people around you, how you're honest even when it's hard, how you carry yourself with a quiet strength that leaves me in awe.</p>
-    <p>I want you to know that choosing you every single day is the easiest decision I've ever made. In a world full of noise and chaos, you are my stillness. You are my home. Wherever you are, that is where I want to be.</p>
-    <p>Thank you for letting me love you. Thank you for loving me back. Thank you for being exactly who you are, because who you are is the most beautiful thing I've ever encountered.</p>
-    <p>This letter is too short. A thousand letters would be too short. But know that every breath I take carries your name, and every heartbeat beats a little louder because of you.</p>
-    <span class="closing">Forever and always, yours 🌹</span>
-  </div>
-</section>
-
-<div class="divider">· · · ♡ · · ·</div>
-
-<section id="reasons">
-  <span class="section-label reveal">Every single one is true</span>
-  <h2 class="section-title reveal">21 Reasons<br>I Love You</h2>
-  <div class="reasons-grid" id="reasonsGrid"></div>
-</section>
-
-<div class="divider">· · · ♡ · · ·</div>
-
-<section id="sorry">
-  <span class="section-label reveal">With all my heart</span>
-  <h2 class="section-title reveal">21 Reasons<br>I'm Sorry</h2>
-  <div class="reasons-grid" id="sorryGrid"></div>
-</section>
-
-<div class="divider">· · · ♡ · · ·</div>
-
-<section id="apology">
-  <span class="section-label reveal">From the deepest part of me</span>
-  <h2 class="section-title reveal">My Sincerest<br>Apology</h2>
-  <div class="letter-body reveal">
-    <span class="salutation">Hayaati,</span>
-    <p>I owe you more than an apology — I owe you the truth that I haven't always been the person you deserve. I've made mistakes. I've hurt you in ways I wish I could undo. And I need you to know that I carry the weight of that with me every day — not out of guilt alone, but because I love you so much that your pain becomes mine.</p>
-    <p>I'm sorry for the times I was too proud to be vulnerable. For the moments I let my ego stand taller than my love. I'm sorry for every time I made you feel unseen, unheard, or unimportant — because you are the most seen, most heard, most important person in my world.</p>
-    <p>I'm sorry for the words I chose poorly, for the silences that said the wrong thing, for the times I wasn't there when you needed me most. I'm sorry for taking your patience for granted — your patience is a gift I didn't always treat like one.</p>
-    <p>I don't want to just say sorry. I want to be different. I want to be the man who shows up fully — present, honest, tender, and consistent. I'm working on that. Every single day. For you.</p>
-    <p>If you'll let me, I'll spend every day proving that I know what I have in you. You are extraordinary. You are rare. And I refuse to let another moment pass without making sure you feel exactly that.</p>
-    <p>Please forgive me, not just with your words, but in the quiet spaces of your heart. I love you more than I have ever been able to properly express — and I will keep trying until I get it right.</p>
-    <span class="closing">Your sincerest love, always 💛</span>
-  </div>
-</section>
-
-<div class="divider">· · · ♡ · · ·</div>
-
-<section id="art">
-  <span class="section-label reveal">Painted just for you</span>
-  <h2 class="section-title reveal">Love Art<br>for Hayaati</h2>
-  <div class="art-canvas-wrap reveal">
-    <canvas id="loveCanvas" width="600" height="500"></canvas>
-    <div class="art-controls">
-      <button class="art-btn active" id="btn-hearts" onclick="drawArt('hearts', this)">Hearts</button>
-      <button class="art-btn" id="btn-galaxy" onclick="drawArt('galaxy', this)">Galaxy</button>
-      <button class="art-btn" id="btn-roses" onclick="drawArt('roses', this)">Roses</button>
-      <button class="art-btn" id="btn-stars" onclick="drawArt('stars', this)">Stars</button>
+  <div class="section-eyebrow">✦ Written from the heart ✦</div>
+  <h2 class="section-title">A Love Letter to Hayaati</h2>
+  <div class="glass-card letter-wrap">
+    <div class="letter-meta">With every piece of my heart,<br><span id="letterDate"></span></div>
+    <span class="letter-salutation">My dearest Hayaati,</span>
+    <div class="letter-body">
+      <p>I sit here, searching for words worthy of you — and I find that no language has yet been invented that could fully capture what you mean to me. You are not simply the person I love. You are the reason I understand what love actually is.</p>
+      <p>Before you, I moved through days without truly feeling them. I smiled, I laughed, I lived — but I was only half present, half awake. You changed that. With you, every ordinary moment becomes something I want to remember forever: the way you laugh before the punchline, the warmth of your presence in a quiet room, the way your eyes hold entire worlds I keep wanting to explore.</p>
+      <p>I love the way your mind works — how you see beauty where others don't, how you care so deeply for the people around you, how you're honest even when it's hard, how you carry yourself with a quiet strength that leaves me in awe.</p>
+      <p>I want you to know that choosing you every single day is the easiest decision I've ever made. In a world full of noise and chaos, you are my stillness. You are my home. Wherever you are, that is where I want to be.</p>
+      <p>Thank you for letting me love you. Thank you for loving me back. Thank you for being exactly who you are, because who you are is the most beautiful thing I've ever encountered.</p>
+      <p>This letter is too short. A thousand letters would be too short. But know that every breath I take carries your name, and every heartbeat beats a little louder because of you.</p>
+    </div>
+    <div class="letter-close">
+      <p>Forever and always,</p>
+      <span class="letter-sig">Yours 🌹</span>
     </div>
   </div>
 </section>
 
-<footer>
-  <span class="big-script">Hayaati</span>
-  Made with love · Every day · Forever
-</footer>
+<!-- 21 REASONS WHY -->
+<section id="reasons">
+  <div class="section-eyebrow">✦ For every day I was away ✦</div>
+  <h2 class="section-title">21 Reasons Why<br><span style="font-size:0.55em; color: var(--gold);">for the 21 days I missed on camp</span></h2>
+  <div class="reasons-tabs">
+    <button class="tab-btn active" onclick="switchTab('love')">Why I Love You 💜</button>
+    <button class="tab-btn" onclick="switchTab('sorry')">Why I'm Sorry 🌹</button>
+  </div>
+  <div class="reasons-grid" id="reasonsGrid"></div>
+</section>
+
+<!-- APOLOGY LETTER -->
+<section id="apology">
+  <div class="section-eyebrow">✦ From the deepest part of me ✦</div>
+  <h2 class="section-title">My Sincerest Apology</h2>
+  <div class="glass-card letter-wrap">
+    <div class="letter-meta">With a humbled heart,<br><span id="apologyDate"></span></div>
+    <span class="letter-salutation">Hayaati,</span>
+    <div class="letter-body">
+      <p>I owe you more than an apology — I owe you the truth that I haven't always been the person you deserve. I've made mistakes. I've hurt you in ways I wish I could undo. And I need you to know that I carry the weight of that with me every day — not out of guilt alone, but because I love you so much that your pain becomes mine.</p>
+      <p>I'm sorry for the times I was too proud to be vulnerable. For the moments I let my ego stand taller than my love. I'm sorry for every time I made you feel unseen, unheard, or unimportant — because you are the most seen, most heard, most important person in my world.</p>
+      <p>I'm sorry for the words I chose poorly, for the silences that said the wrong thing, for the times I wasn't there when you needed me most. I'm sorry for taking your patience for granted — your patience is a gift I didn't always treat like one.</p>
+      <p>I don't want to just say sorry. I want to be different. I want to be the man who shows up fully — present, honest, tender, and consistent. I'm working on that. Every single day. For you.</p>
+      <p>If you'll let me, I'll spend every day proving that I know what I have in you. You are extraordinary. You are rare. And I refuse to let another moment pass without making sure you feel exactly that.</p>
+      <p>Please forgive me, not just with your words, but in the quiet spaces of your heart. I love you more than I have ever been able to properly express — and I will keep trying until I get it right.</p>
+    </div>
+    <div class="letter-close">
+      <p>Your sincerest love, always,</p>
+      <span class="letter-sig">Forever sorry & forever yours 💛</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOVE ART -->
+<section id="art">
+  <div class="section-eyebrow">✦ Painted just for you ✦</div>
+  <h2 class="section-title">Love Art for Hayaati</h2>
+  <div class="art-wrap">
+    <canvas id="loveCanvas" width="500" height="380"></canvas>
+    <div class="art-controls">
+      <button class="art-btn active" onclick="drawArt('hearts', this)">Hearts 💜</button>
+      <button class="art-btn" onclick="drawArt('galaxy', this)">Galaxy ✨</button>
+      <button class="art-btn" onclick="drawArt('roses', this)">Roses 🌹</button>
+      <button class="art-btn" onclick="drawArt('stars', this)">Stars 🌟</button>
+    </div>
+    <p class="art-hint">Draw freely on the canvas with your mouse ✍️</p>
+  </div>
+</section>
 
 <script>
-// Cursor
+// ── Cursor ──
 const cursor = document.getElementById('cursor');
-const trail = document.getElementById('cursorTrail');
-let mx = 0, my = 0, tx = 0, ty = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function animCursor() {
-  cursor.style.left = mx - 6 + 'px'; cursor.style.top = my - 6 + 'px';
-  tx += (mx - tx) * 0.1; ty += (my - ty) * 0.1;
-  trail.style.left = tx - 15 + 'px'; trail.style.top = ty - 15 + 'px';
-  requestAnimationFrame(animCursor);
-})();
+const dot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+  dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
 
-// Petals
-const petalsBg = document.getElementById('petalsBg');
-for (let i = 0; i < 25; i++) {
-  const p = document.createElement('div');
-  p.className = 'petal-particle';
-  p.style.cssText = `left:${Math.random()*100}%;animation-duration:${8+Math.random()*10}s;animation-delay:${Math.random()*12}s;width:${4+Math.random()*6}px;height:${6+Math.random()*8}px`;
-  petalsBg.appendChild(p);
+// ── Particles ──
+const particleContainer = document.getElementById('particles');
+const purpleHearts = ['💜','💜','💜'];
+const pinkHearts   = ['🩷','🌸','🌷','💗','💝','💕'];
+const mixedEmojis  = ['✨','🦋','🌟','💫','🌺'];
+const heartChars   = ['♥','♡'];
+const heartColors  = [
+  'rgba(155,108,200,0.7)','rgba(200,130,220,0.7)',
+  'rgba(232,122,191,0.7)','rgba(180,100,210,0.65)',
+  'rgba(210,150,240,0.6)','rgba(240,180,220,0.7)'
+];
+
+function spawnEmoji(pool, cls) {
+  const el = document.createElement('div');
+  el.classList.add('heart-float');
+  if (cls) el.classList.add(cls);
+  if (Math.random() < 0.2) el.classList.add('distant');
+  el.textContent = pool[Math.floor(Math.random() * pool.length)];
+  el.style.left = Math.random() * 100 + '%';
+  el.style.fontSize = (0.8 + Math.random() * 1.1) + 'rem';
+  const dur = 9 + Math.random() * 10;
+  el.style.animationDuration = dur + 's';
+  el.style.animationDelay = (Math.random() * 2) + 's';
+  particleContainer.appendChild(el);
+  setTimeout(() => el.remove(), (dur + 3) * 1000);
+}
+function spawnGlassBubble() {
+  const el = document.createElement('div');
+  el.classList.add('glass-heart');
+  const isDistant = Math.random() < 0.2;
+  if (isDistant) el.classList.add('distant');
+  const size = isDistant ? 10 + Math.random() * 10 : 18 + Math.random() * 28;
+  const col = heartColors[Math.floor(Math.random() * heartColors.length)];
+  el.style.cssText = `font-size:${size}px;color:${col};left:${Math.random()*100}%;text-shadow:0 0 8px ${col};animation-duration:${12+Math.random()*12}s;animation-delay:${Math.random()*3}s;`;
+  el.textContent = heartChars[Math.floor(Math.random() * heartChars.length)];
+  particleContainer.appendChild(el);
+  setTimeout(() => el.remove(), 28000);
+}
+function spawnOrb() {
+  const el = document.createElement('div');
+  const isPink = Math.random() > 0.5;
+  const isDistant = Math.random() < 0.2;
+  el.classList.add('particle', isPink ? 'pink-orb' : 'orb');
+  if (isDistant) el.classList.add('distant');
+  const s = isDistant ? 3 + Math.random() * 6 : 6 + Math.random() * 18;
+  el.style.width = s + 'px'; el.style.height = s + 'px';
+  el.style.left = Math.random() * 100 + '%';
+  const dur = 12 + Math.random() * 14;
+  el.style.animationDuration = dur + 's';
+  el.style.animationDelay = Math.random() * 3 + 's';
+  particleContainer.appendChild(el);
+  setTimeout(() => el.remove(), (dur + 4) * 1000);
 }
 
-// Floating hearts
-const fh = document.getElementById('floatingHearts');
-const hemojis = ['♡','💕','💗','🌹','✨','💫'];
-for (let i = 0; i < 15; i++) {
-  const h = document.createElement('div');
-  h.className = 'fheart';
-  h.textContent = hemojis[i % hemojis.length];
-  h.style.cssText = `left:${Math.random()*100}%;animation-duration:${12+Math.random()*15}s;animation-delay:${Math.random()*20}s;font-size:${0.6+Math.random()*0.8}rem`;
-  fh.appendChild(h);
+for (let i = 0; i < 10; i++) setTimeout(() => spawnEmoji(purpleHearts), i * 200);
+for (let i = 0; i < 8;  i++) setTimeout(() => spawnEmoji(pinkHearts, 'pink'), i * 250);
+for (let i = 0; i < 6;  i++) setTimeout(() => spawnEmoji(mixedEmojis), i * 300);
+for (let i = 0; i < 8;  i++) setTimeout(spawnGlassBubble, i * 350);
+for (let i = 0; i < 6;  i++) setTimeout(spawnOrb, i * 220);
+setInterval(() => spawnEmoji(purpleHearts), 1000);
+setInterval(() => spawnEmoji(pinkHearts, 'pink'), 1250);
+setInterval(() => spawnEmoji(mixedEmojis), 1750);
+setInterval(spawnGlassBubble, 1500);
+setInterval(spawnOrb, 1125);
+
+// ── Section switcher ──
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  const sec = document.getElementById(id);
+  sec.style.display = 'flex';
+  requestAnimationFrame(() => sec.classList.add('active'));
+  document.querySelectorAll('nav button').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + id + "'")) b.classList.add('active');
+  });
+  spawnPetals();
+  if (id === 'art') setTimeout(() => drawArt('hearts', document.querySelector('.art-btn')), 100);
+}
+function spawnPetals() {
+  const petals = ['💜','🩷','🌸','💕','✨','🌷','💗','🦋'];
+  for (let i = 0; i < 11; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.classList.add('petal-fall');
+      el.textContent = petals[Math.floor(Math.random() * petals.length)];
+      el.style.left = (5 + Math.random() * 90) + 'vw';
+      el.style.top = '-2rem';
+      el.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+      const dur = 3 + Math.random() * 2.5;
+      el.style.animation = `petalDrop ${dur}s linear both`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), dur * 1000 + 300);
+    }, i * 120);
+  }
 }
 
-// Daily message
+// ── Dates ──
+const now = new Date();
+const fmt = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+const ds = now.toLocaleDateString('en-US', fmt);
+['todayDate','letterDate','apologyDate'].forEach(id => {
+  const el = document.getElementById(id); if (el) el.textContent = ds;
+});
+
+// ── Daily messages ──
 const messages = [
   "Good morning, sunshine. You were the first thought on my mind when I woke up today — and every day. I hope today is as beautiful as you are.",
   "I just want you to know that you make this world infinitely better simply by being in it. Thank you for existing, Hayaati.",
@@ -389,87 +813,105 @@ const messages = [
   "Forever isn't long enough when you're who I'm spending it with.",
   "You are loved. Deeply, madly, wholly. Never forget that."
 ];
-const now = new Date();
 const dayIdx = (now.getFullYear() * 365 + now.getMonth() * 31 + now.getDate()) % messages.length;
 document.getElementById('dailyMsg').textContent = messages[dayIdx];
-document.getElementById('todayDate').textContent = now.toLocaleDateString('en-US', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
-// 21 Love reasons
+// ── 21 Reasons ──
 const loveReasons = [
+  "Being around you fills me with so much happiness that I can't help but smile like a fool",
+  "You've been patient with me, kind to me, and gentle with me even when I'm not perfect",
+  "I am finished for you, helplessly and hopelessly",
   "Following my heart led me straight to you, and that is the best decision I ever made",
-  "Your beauty caught my eyes, but your heart is what made me stay",
-  "No matter how "hard guy" i act, seeing you melts me instantly",
-  ""I have never been here before" slaps every time, because you are truly one of a kind",
-  "You are seffless, intentional, and that kind of love is rare",
-  "With you beside me everyhting feels easier to navigate",
+  "You are such a wonderful soul",
+  "No matter how \"hard guy\" I act, seeing you melts me instantly",
+  "\"I have never been here before\" slaps every time, because you are truly one of a kind",
+  "You are selfless, intentional, and that kind of love is rare",
+  "With you beside me everything feels easier to navigate",
   "You are my best friend and fooling is our love language",
-  "You are beautiful inside, outside, in every possible way my "beauty with brains"",
+  "You are beautiful inside, outside, in every possible way my \"beauty with brains\"",
   "You are so brilliant, creative, and smart",
   "Your kindness is effortless, and it inspires me to be a better person",
   "Even in our shege days, the abundance of love between us always pulls us through",
   "Your presence is my peace, my happiness, my joy, my Alayo",
   "You are noor ala noor, you light up every room you walk into, and you light up my life in ways I never thought possible",
   "The sound of your voice, especially when you say my name",
-  "Being around you fills me with so much happiness that I can't help but smile like a fool",
-  "You've been patient with me, kind to me, and gentle with me even when I'm not perfect",
-  "you perfectly fit in my arms, like you were made to be there",
   "You always strive so hard and that inspires me to do more because you deserve the whole world",
   "You are resilient, hardworking, intelligent, creative, and that is deeply inspiring",
   "You are my fun guy(fungi) and without you there is no fun to my gi(guy)",
   "Because you are my world, my love, my queen, my princess, my forever. Hayaatiii, maseratiiii, bugattiiii, body so teaaa, testimonyyyy"
 ];
 
-const rg = document.getElementById('reasonsGrid');
-loveReasons.forEach((r, i) => {
-  const c = document.createElement('div');
-  c.className = 'reason-card reveal';
-  c.innerHTML = `<span class="reason-num">${String(i+1).padStart(2,'0')}</span><p class="reason-text">${r}</p>`;
-  rg.appendChild(c);
-});
-
-// 21 Sorry reasons
 const sorryReasons = [
-  "For every time I made you feel less than the incredible person you are",
-  "For the moments I chose my pride over your feelings",
-  "For not listening closely enough when you were speaking",
-  "For the times I was cold when you needed warmth",
-  "For taking your love for granted as if it were guaranteed",
-  "For every time I made you cry when I should have made you smile",
-  "For promises I made but didn't keep",
-  "For the days I was emotionally absent even when physically present",
-  "For every thoughtless word I said that I can never fully take back",
-  "For not celebrating you enough, loudly and often",
-  "For the times I didn't show up the way you needed me to",
-  "For making you question whether you were enough — you are more than enough",
-  "For not apologizing sooner, and not meaning it more completely",
-  "For every time I let my bad days spill onto you unfairly",
-  "For the moments I was selfish when I should have been selfless",
-  "For not protecting your peace the way you always protect mine",
-  "For being too slow to recognize the effort you put into us",
-  "For making you feel like loving me was a burden — it is the greatest gift",
-  "For the insecurities I let become unfair accusations toward you",
-  "For every time you felt alone while you were with me",
-  "For not telling you 'I'm sorry' and 'I love you' nearly enough"
+  "I'm sorry for not communicating with you when you deserved clarity",
+  "I'm sorry for not explaining properly what happened and why I couldn't get you a present on our anniversary",
+  "I'm sorry for allowing silence to create confusion between us",
+  "I'm sorry for making you feel like you had to guess what was going on in my head",
+  "I'm sorry for repeatedly bringing up the fact that you didn't post me on our anniversary",
+  "I'm sorry for turning something small into something that hurt you",
+  "I'm sorry for letting my emotions control my reactions instead of handling things maturely",
+  "I'm sorry for not pausing to understand your side before expressing mine",
+  "I'm sorry for how I handled the situation at camp",
+  "I'm sorry for not being your confidant when you needed someone to lean on",
+  "I'm sorry for not being your safe space in that moment",
+  "I'm sorry for not making myself emotionally available to you",
+  "I'm sorry for causing you pain when my role is to protect your heart",
+  "I'm sorry for making you feel alone when you shouldn't have",
+  "I'm sorry for not choosing gentleness with my words",
+  "I'm sorry for reacting instead of reassuring you",
+  "I'm sorry for not loving you in the way you needed in that moment",
+  "I'm sorry for every time you felt alone while you were with me",
+  "I'm sorry for not telling you 'I'm sorry' and 'I love you' nearly enough",
+  "I'm sorry for any tears, heaviness, or hurt I caused you",
+  "Most of all, I'm sorry because you are Hayaati, my love, my peace, my world — and hurting you was never my intention. I deeply regret my actions, and I promise to grow and be better for you"
 ];
 
-const sg = document.getElementById('sorryGrid');
-sorryReasons.forEach((r, i) => {
-  const c = document.createElement('div');
-  c.className = 'reason-card reveal';
-  c.innerHTML = `<span class="reason-num">${String(i+1).padStart(2,'0')}</span><p class="reason-text">${r}</p>`;
-  sg.appendChild(c);
-});
+let currentTab = 'love';
+const grid = document.getElementById('reasonsGrid');
 
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function renderReasons(tab) {
+  grid.innerHTML = '';
+  const list = tab === 'love' ? loveReasons : sorryReasons;
+  list.forEach((r, i) => {
+    const card = document.createElement('div');
+    card.classList.add('reason-card');
+    card.innerHTML = `<div class="reason-num ${tab === 'sorry' ? 'sorry-num' : ''}">${i + 1}</div><div class="reason-text">${r}</div>`;
+    grid.appendChild(card);
+  });
+}
+renderReasons('love');
 
-// ── LOVE ART ──
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + tab + "'")) b.classList.add('active');
+  });
+  grid.style.opacity = '0';
+  setTimeout(() => { renderReasons(tab); grid.style.opacity = '1'; grid.style.transition = 'opacity 0.4s'; }, 200);
+}
+
+// ── Canvas Art ──
 const canvas = document.getElementById('loveCanvas');
 const ctx = canvas.getContext('2d');
 let artAnimId = null;
+let drawing = false, lastX = 0, lastY = 0;
+
+canvas.addEventListener('mousedown', e => {
+  drawing = true;
+  const r = canvas.getBoundingClientRect();
+  [lastX, lastY] = [e.clientX - r.left, e.clientY - r.top];
+});
+canvas.addEventListener('mousemove', e => {
+  if (!drawing) return;
+  const r = canvas.getBoundingClientRect();
+  const x = e.clientX - r.left, y = e.clientY - r.top;
+  ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(x, y);
+  ctx.strokeStyle = '#9b6cc8'; ctx.lineWidth = 3;
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+  [lastX, lastY] = [x, y];
+});
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mouseleave', () => drawing = false);
 
 function drawArt(mode, btn) {
   if (artAnimId) cancelAnimationFrame(artAnimId);
@@ -481,156 +923,153 @@ function drawArt(mode, btn) {
   else if (mode === 'stars') startStars();
 }
 
-// HEARTS
+// Hearts art
 let heartsList = [];
 function drawHeartShape(x, y, s, color, alpha) {
   ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color;
   ctx.beginPath();
-  ctx.moveTo(x, y + s*0.3);
-  ctx.bezierCurveTo(x, y, x-s, y, x-s, y+s*0.3);
-  ctx.bezierCurveTo(x-s, y+s*0.65, x, y+s*0.95, x, y+s*1.1);
-  ctx.bezierCurveTo(x, y+s*0.95, x+s, y+s*0.65, x+s, y+s*0.3);
-  ctx.bezierCurveTo(x+s, y, x, y, x, y+s*0.3);
+  ctx.moveTo(x, y + s * 0.3);
+  ctx.bezierCurveTo(x, y, x - s, y, x - s, y + s * 0.3);
+  ctx.bezierCurveTo(x - s, y + s * 0.65, x, y + s * 0.95, x, y + s * 1.1);
+  ctx.bezierCurveTo(x, y + s * 0.95, x + s, y + s * 0.65, x + s, y + s * 0.3);
+  ctx.bezierCurveTo(x + s, y, x, y, x, y + s * 0.3);
   ctx.fill(); ctx.restore();
 }
 function startHearts() {
   heartsList = [];
+  const W = canvas.width, H = canvas.height;
   function frame() {
-    ctx.fillStyle = 'rgba(26,8,14,0.18)';
-    ctx.fillRect(0, 0, 600, 500);
-    ctx.save(); ctx.globalAlpha = 0.06; ctx.fillStyle = '#c8536a';
-    ctx.font = 'italic 85px "Pinyon Script", cursive';
-    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 260); ctx.restore();
-    if (Math.random() < 0.1) {
-      heartsList.push({
-        x: Math.random()*600, y: 520,
-        s: 10+Math.random()*28, spd: 0.6+Math.random()*1.4,
-        w: Math.random()*Math.PI*2, a: 0.5+Math.random()*0.45,
-        hue: 330+Math.random()*30, sat: 65+Math.random()*20, lit: 55+Math.random()*20
-      });
-    }
+    ctx.fillStyle = 'rgba(240,230,255,0.15)'; ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalAlpha = 0.06; ctx.fillStyle = '#7a4aaa';
+    ctx.font = 'italic 85px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', W/2, H/2 + 30); ctx.restore();
+    if (Math.random() < 0.1) heartsList.push({
+      x: Math.random() * W, y: H + 20,
+      s: 10 + Math.random() * 28, spd: 0.6 + Math.random() * 1.4,
+      w: Math.random() * Math.PI * 2, a: 0.5 + Math.random() * 0.45,
+      hue: 270 + Math.random() * 60
+    });
     heartsList = heartsList.filter(h => h.y > -60);
     heartsList.forEach(h => {
-      h.y -= h.spd; h.w += 0.02; h.x += Math.sin(h.w)*0.6;
-      drawHeartShape(h.x, h.y, h.s, `hsl(${h.hue},${h.sat}%,${h.lit}%)`, h.a);
+      h.y -= h.spd; h.w += 0.02; h.x += Math.sin(h.w) * 0.6;
+      drawHeartShape(h.x, h.y, h.s, `hsl(${h.hue},65%,60%)`, h.a);
     });
     artAnimId = requestAnimationFrame(frame);
   }
   frame();
 }
 
-// GALAXY
+// Galaxy art
 let galAngle = 0;
-const galStars = Array.from({length:180}, () => ({
-  x: Math.random()*600, y: Math.random()*500,
-  r: Math.random()*1.8, ph: Math.random()*Math.PI*2, spd: 0.005+Math.random()*0.01
+const galStars = Array.from({ length: 180 }, () => ({
+  x: Math.random() * 500, y: Math.random() * 380,
+  r: Math.random() * 1.8, ph: Math.random() * Math.PI * 2, spd: 0.005 + Math.random() * 0.01
 }));
 function startGalaxy() {
-  ctx.fillStyle = '#060210'; ctx.fillRect(0,0,600,500);
-  galAngle = 0;
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#1a0a2e'; ctx.fillRect(0, 0, W, H); galAngle = 0;
   function frame() {
-    ctx.fillStyle = 'rgba(5,2,15,0.12)'; ctx.fillRect(0,0,600,500);
+    ctx.fillStyle = 'rgba(20,8,40,0.12)'; ctx.fillRect(0, 0, W, H);
     galAngle += 0.018;
     galStars.forEach(s => {
       s.ph += s.spd;
-      const a = 0.25 + Math.abs(Math.sin(s.ph))*0.75;
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      const a = 0.25 + Math.abs(Math.sin(s.ph)) * 0.75;
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(200,185,255,${a})`; ctx.fill();
     });
     for (let i = 0; i < 180; i++) {
-      const t = i*0.16 + galAngle, r = i*1.55;
-      const x = 300 + Math.cos(t)*r, y = 250 + Math.sin(t)*r*0.45;
-      if (x<0||x>600||y<0||y>500) continue;
-      ctx.beginPath(); ctx.arc(x, y, 1.3, 0, Math.PI*2);
-      ctx.fillStyle = `hsla(${270+i*0.6},75%,72%,0.55)`; ctx.fill();
+      const t = i * 0.16 + galAngle, r = i * 1.3;
+      const x = W/2 + Math.cos(t) * r, y = H/2 + Math.sin(t) * r * 0.45;
+      if (x < 0 || x > W || y < 0 || y > H) continue;
+      ctx.beginPath(); ctx.arc(x, y, 1.3, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${270 + i * 0.6},75%,72%,0.55)`; ctx.fill();
     }
-    ctx.save(); ctx.globalAlpha = 0.45+Math.sin(galAngle)*0.15;
-    ctx.fillStyle = '#e0ccff'; ctx.font = 'italic 62px "Pinyon Script", cursive';
-    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 265); ctx.restore();
+    ctx.save(); ctx.globalAlpha = 0.45 + Math.sin(galAngle) * 0.15;
+    ctx.fillStyle = '#e0ccff'; ctx.font = 'italic 62px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', W/2, H/2 + 20); ctx.restore();
     artAnimId = requestAnimationFrame(frame);
   }
   frame();
 }
 
-// ROSES
+// Roses art
 let roseT = 0;
 function drawRose(cx, cy, sz, hue) {
-  ctx.save(); ctx.translate(cx,cy); ctx.fillStyle = `hsla(${hue},55%,38%,0.7)`;
-  for (let p=0;p<5;p++) {
-    ctx.save(); ctx.rotate(p*Math.PI*2/5);
-    ctx.beginPath(); ctx.ellipse(0,-sz*0.5,sz*0.32,sz*0.52,0,0,Math.PI*2);
+  ctx.save(); ctx.translate(cx, cy);
+  ctx.fillStyle = `hsla(${hue},55%,38%,0.7)`;
+  for (let p = 0; p < 5; p++) {
+    ctx.save(); ctx.rotate(p * Math.PI * 2 / 5);
+    ctx.beginPath(); ctx.ellipse(0, -sz * 0.5, sz * 0.32, sz * 0.52, 0, 0, Math.PI * 2);
     ctx.fill(); ctx.restore();
   }
-  ctx.fillStyle = `hsla(${hue+15},65%,52%,0.5)`;
-  for (let p=0;p<5;p++) {
-    ctx.save(); ctx.rotate(p*Math.PI*2/5+0.3);
-    ctx.beginPath(); ctx.ellipse(0,-sz*0.35,sz*0.22,sz*0.38,0,0,Math.PI*2);
+  ctx.fillStyle = `hsla(${hue + 15},65%,52%,0.5)`;
+  for (let p = 0; p < 5; p++) {
+    ctx.save(); ctx.rotate(p * Math.PI * 2 / 5 + 0.3);
+    ctx.beginPath(); ctx.ellipse(0, -sz * 0.35, sz * 0.22, sz * 0.38, 0, 0, Math.PI * 2);
     ctx.fill(); ctx.restore();
   }
   ctx.restore();
 }
 function startRoses() {
-  roseT = 0;
-  ctx.fillStyle = '#100608'; ctx.fillRect(0,0,600,500);
+  const W = canvas.width, H = canvas.height;
+  roseT = 0; ctx.fillStyle = '#1a0a10'; ctx.fillRect(0, 0, W, H);
   function frame() {
-    ctx.fillStyle = 'rgba(14,5,8,0.1)'; ctx.fillRect(0,0,600,500);
+    ctx.fillStyle = 'rgba(20,5,10,0.1)'; ctx.fillRect(0, 0, W, H);
     roseT += 0.012;
-    for (let i=0;i<7;i++) for (let j=0;j<5;j++) {
-      const cx = 50+i*85, cy = 50+j*100+Math.sin(roseT+i*0.5)*8;
-      drawRose(cx, cy, 20, 330+Math.sin(roseT+i+j)*12);
-      ctx.save(); ctx.translate(cx,cy+26); ctx.rotate(0.25+Math.sin(roseT+i)*0.08);
-      ctx.fillStyle='rgba(20,65,20,0.45)'; ctx.beginPath();
-      ctx.ellipse(0,6,7,13,0,0,Math.PI*2); ctx.fill(); ctx.restore();
+    for (let i = 0; i < 6; i++) for (let j = 0; j < 4; j++) {
+      const cx = 45 + i * 85, cy = 50 + j * 95 + Math.sin(roseT + i * 0.5) * 8;
+      drawRose(cx, cy, 20, 310 + Math.sin(roseT + i + j) * 20);
     }
-    ctx.save(); ctx.globalAlpha = 0.5+Math.sin(roseT)*0.1;
-    ctx.fillStyle = '#ffdde8'; ctx.font = 'italic 58px "Pinyon Script", cursive';
-    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 262); ctx.restore();
+    ctx.save(); ctx.globalAlpha = 0.5 + Math.sin(roseT) * 0.1;
+    ctx.fillStyle = '#ffdde8'; ctx.font = 'italic 58px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', W/2, H/2 + 20); ctx.restore();
     artAnimId = requestAnimationFrame(frame);
   }
   frame();
 }
 
-// STARS / CONSTELLATION
-const constPts = Array.from({length:42},()=>({
-  x:25+Math.random()*550, y:25+Math.random()*450,
-  vx:(Math.random()-0.5)*0.25, vy:(Math.random()-0.5)*0.25,
-  r:0.8+Math.random()*2
+// Stars art
+const constPts = Array.from({ length: 42 }, () => ({
+  x: 25 + Math.random() * 450, y: 25 + Math.random() * 330,
+  vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+  r: 0.8 + Math.random() * 2
 }));
 let constT = 0;
 function startStars() {
-  ctx.fillStyle = '#040212'; ctx.fillRect(0,0,600,500);
-  constT = 0;
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#0a0218'; ctx.fillRect(0, 0, W, H); constT = 0;
   function frame() {
-    ctx.fillStyle = 'rgba(4,2,18,0.18)'; ctx.fillRect(0,0,600,500);
+    ctx.fillStyle = 'rgba(8,2,20,0.18)'; ctx.fillRect(0, 0, W, H);
     constT += 0.006;
     constPts.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<15||p.x>585) p.vx*=-1;
-      if(p.y<15||p.y>485) p.vy*=-1;
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 15 || p.x > W - 15) p.vx *= -1;
+      if (p.y < 15 || p.y > H - 15) p.vy *= -1;
     });
-    for (let i=0;i<constPts.length;i++) for (let j=i+1;j<constPts.length;j++) {
-      const dx=constPts[i].x-constPts[j].x, dy=constPts[i].y-constPts[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<110) {
-        ctx.beginPath(); ctx.moveTo(constPts[i].x,constPts[i].y); ctx.lineTo(constPts[j].x,constPts[j].y);
-        ctx.strokeStyle=`rgba(200,175,255,${(1-d/110)*0.28})`; ctx.lineWidth=0.5; ctx.stroke();
+    for (let i = 0; i < constPts.length; i++) for (let j = i + 1; j < constPts.length; j++) {
+      const dx = constPts[i].x - constPts[j].x, dy = constPts[i].y - constPts[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 110) {
+        ctx.beginPath(); ctx.moveTo(constPts[i].x, constPts[i].y); ctx.lineTo(constPts[j].x, constPts[j].y);
+        ctx.strokeStyle = `rgba(200,175,255,${(1 - d / 110) * 0.28})`; ctx.lineWidth = 0.5; ctx.stroke();
       }
     }
     constPts.forEach(p => {
-      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-      g.addColorStop(0,'rgba(255,225,255,0.95)'); g.addColorStop(1,'transparent');
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
+      g.addColorStop(0, 'rgba(255,225,255,0.95)'); g.addColorStop(1, 'transparent');
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
     });
-    ctx.save(); ctx.globalAlpha = 0.4+Math.sin(constT*2)*0.12;
-    ctx.fillStyle = '#ccb8ff'; ctx.font = 'italic 60px "Pinyon Script", cursive';
-    ctx.textAlign = 'center'; ctx.fillText('Hayaati', 300, 263); ctx.restore();
+    ctx.save(); ctx.globalAlpha = 0.4 + Math.sin(constT * 2) * 0.12;
+    ctx.fillStyle = '#ccb8ff'; ctx.font = 'italic 60px Georgia, serif';
+    ctx.textAlign = 'center'; ctx.fillText('Hayaati', W/2, H/2 + 20); ctx.restore();
     artAnimId = requestAnimationFrame(frame);
   }
   frame();
 }
 
 // Init
-startHearts();
+document.querySelectorAll('section').forEach(s => { if (!s.classList.contains('active')) s.style.display = 'none'; });
+drawArt('hearts', document.querySelector('.art-btn'));
 </script>
 </body>
 </html>
